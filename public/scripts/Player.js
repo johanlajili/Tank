@@ -32,8 +32,8 @@ game.Player = function(id, color, name){
 
 	this.x = 10;
 	this.y = 10;
-	this.w = 10;
-	this.h = 10;
+	this.w = 72;
+	this.h = 83;
 
 	this.bombs = [];
 	this.bombsTimer = 100;
@@ -88,12 +88,20 @@ game.Player = function(id, color, name){
 	}
 	this.render = function(CTX){
 
-		CTX.fillStyle = this.color;
-		CTX.fillRect(this.x, this.y, this.w, this.h);
+		this.drawPlayer(CTX);
 		for (var i in this.bombs){
 			this.bombs[i].render(CTX);
 		}
 
+	}
+	this.drawPlayer = function(CTX)
+	{
+		CTX.drawImage(
+			imageManager.getImage("tank"+this.color),
+			 this.x,
+			 this.y,
+			 this.w,
+			 this.h);
 	}
 	this.shoot = function(){
 		
