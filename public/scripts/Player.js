@@ -24,6 +24,7 @@ game.Player = function(id, color, name){
 		}
 	}
 	this.angle = 0;
+	this.aimAngle = 0; // angle de tir, en radian
 	this.speed = 0;
 	this.accel = 0.5;
 	this.angleTick = 0.05;
@@ -89,6 +90,7 @@ game.Player = function(id, color, name){
 	this.render = function(CTX){
 
 		this.drawPlayer(CTX);
+		this.drawCanon(CTX);
 		for (var i in this.bombs){
 			this.bombs[i].render(CTX);
 		}
@@ -101,8 +103,15 @@ game.Player = function(id, color, name){
 		CTX.rotate(this.angle)
 		CTX.drawImage(imageManager.getImage("tank"+this.color),-this.w/2, -this.h/2,this.w,this.h);
 		CTX.restore();
+	}
 
-
+	this.drawCanon = function(CTX)
+	{
+		CTX.save()
+		CTX.translate(this.x , this.y);
+		CTX.rotate(this.aimAngle)
+		CTX.drawImage(imageManager.getImage("canon"),-this.w/2, -this.h/2,this.w,this.h);
+		CTX.restore();
 	}
 	this.shoot = function(){
 		
