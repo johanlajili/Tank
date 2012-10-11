@@ -107,7 +107,7 @@ game.Player = function(id, color, name){
 	this.shoot = function(){
 		
 		if (game.currdate - this.lastBomb > this.bombsTimer){
-			this.bombs.push(new game.Bomb(this.x, this.y, this.x + 50, this.y + 50));
+			this.bombs.push(new game.Bomb(this.x, this.y, this.x + 50, this.y + 50,imageManager.getImage('Bomb')));
 			this.lastBomb = game.currdate;
 		}
 	}

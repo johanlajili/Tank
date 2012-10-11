@@ -18,7 +18,7 @@ var Game = function(){};
 var game = new Game();
 game.render = function(){
 	this.CTX.clearRect(0, 0, this.CANVAS.width, this.CANVAS.height);
-	this.bomb.render(this.CTX);
+	//this.bomb.render(this.CTX);
 
 	for (var i in this.players){
 		this.players[i].render(this.CTX);
@@ -28,7 +28,7 @@ game.animate = function(){
 }
 game.update = function(){
 
-	this.bomb.update();
+	//this.bomb.update();
 	for (var i in this.players){
 		this.players[i].update(); 
 	}

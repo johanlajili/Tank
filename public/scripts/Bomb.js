@@ -1,4 +1,4 @@
-game.Bomb = function(x,y,xTarget,yTarget){
+game.Bomb = function(x,y,xTarget,yTarget,image){
 	this.x = x;
 	this.y = y;
 	this.xTarget = xTarget;
@@ -10,18 +10,39 @@ game.Bomb = function(x,y,xTarget,yTarget){
 	this.rayon = 2* Math.atan(this.yr/(this.xr + Math.sqrt( Math.pow(this.xr,2) + Math.pow(this.yr,2)))) ;
 
 
-	/*this.image = image;
+	this.image = image;
 	this.width = this.image.width;
-	this.height = this.image.height;*/	
+	this.height = this.image.height;
+
+	// rotate around that point, converting our 
+	// angle from degrees to radians
+	this.vecteur1 = {y:0,x:this.x+1-this.x};
+	this.vecteur2 = {y:this.yTarget-this.y,x:this.xTarget-this.x};
+	this.cosa = (this.vecteur1.x*this.vecteur2.x + this.vecteur1.y*this.vecteur2.y)/(Math.sqrt(this.vecteur1.x*this.vecteur1.x+this.vecteur1.y*this.vecteur1.y)*Math.sqrt(this.vecteur2.x*this.vecteur2.x+this.vecteur2.y*this.vecteur2.y));
+	this.angle = (180/Math.PI)*Math.acos(this.cosa);
 	//this.collider = collider;
 }
 
 game.Bomb.prototype.render = function(CTX) {
-	// if(this.image){
-	// 	CTX.drawImage(image,x,y);
-	// }
-	CTX.fillStyle = "black";
-	CTX.fillRect(this.x,this.y,10,10);
+	var TO_RADIANS = Math.PI/180;
+	// save the current co-ordinate system 
+	// before we screw with it
+	CTX.save(); 
+ 
+	// move to the middle of where we want to draw our image
+	CTX.translate(this.x, this.y);
+ 
+	//var angle = Math.atan2(this.y - this.y, this.x+100 - this.x) - Math.atan2(this.yTarget - this.y, this.xTarget - this.x);
+	//Math.atan2(B.getY() - A.getY(), B.getX() - A.getX()) - Math.atan2(N.getY() - M.getY(), N.getX() - M.getX())
+	CTX.rotate(this.angle * TO_RADIANS);
+ 
+	// draw it up and to the left by half the width
+	// and height of the image 
+	Debug.log(this.image);
+	CTX.drawImage(this.image, -(this.image.width/2), -(this.image.height/2));
+ 
+	// and restore the co-ords to how they were when we began
+	CTX.restore(); 
 	
 };
 game.Bomb.prototype.update = function() {
