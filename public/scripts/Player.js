@@ -23,17 +23,17 @@ game.Player = function(id, color, name){
 			"time" : 30
 		}
 	}
-	this.angle = 0.2;
+	this.angle = 0;
 	this.speed = 0;
-	this.accel = 1;
-	this.angleTick = 0.1;
-	this.maxSpeed = 10;
-	this.minSpeed = -10;
+	this.accel = 0.5;
+	this.angleTick = 0.05;
+	this.maxSpeed = 2;
+	this.minSpeed = -2;
 
 	this.x = 10;
 	this.y = 10;
-	this.w = 72;
-	this.h = 83;
+	this.w = 83;
+	this.h = 72;
 
 	this.bombs = [];
 	this.bombsTimer = 100;
@@ -96,12 +96,13 @@ game.Player = function(id, color, name){
 	}
 	this.drawPlayer = function(CTX)
 	{
-		CTX.drawImage(
-			imageManager.getImage("tank"+this.color),
-			 this.x,
-			 this.y,
-			 this.w,
-			 this.h);
+		CTX.save()
+		CTX.translate(this.x , this.y);
+		CTX.rotate(this.angle)
+		CTX.drawImage(imageManager.getImage("tank"+this.color),-this.w/2, -this.h/2,this.w,this.h);
+		CTX.restore();
+
+
 	}
 	this.shoot = function(){
 		
