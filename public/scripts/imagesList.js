@@ -5,8 +5,8 @@
 	["tankPurple", "Tank/purple.png"],
 	["tankGreen", "Tank/green.png"],
 	["canon", "Canon/generic.png"],
-	["Bomb", "Bomb.png"]
-	["canon", "Canon/generic.png"]
+	["Bomb", "Bomb.png"],
+	["canon", "Canon/generic.png"],
 
 
 	// Map spritesheet
