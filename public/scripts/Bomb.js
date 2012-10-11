@@ -1,4 +1,4 @@
-game.Bomb = function(x,y,xTarget,yTarget,image){
+game.Bomb = function(x,y,xTarget,yTarget,ima){
 	this.x = x;
 	this.y = y;
 	this.xTarget = xTarget;
@@ -9,8 +9,8 @@ game.Bomb = function(x,y,xTarget,yTarget,image){
 	this.yr = this.yTarget - this.y;
 	this.rayon = 2* Math.atan(this.yr/(this.xr + Math.sqrt( Math.pow(this.xr,2) + Math.pow(this.yr,2)))) ;
 
-
-	this.image = image;
+	this.img = img;
+	this.image = imageManager.getImage(this.img);
 	this.width = this.image.width;
 	this.height = this.image.height;
 
@@ -39,7 +39,7 @@ game.Bomb.prototype.render = function(CTX) {
 	// draw it up and to the left by half the width
 	// and height of the image 
 	Debug.log(this.image);
-	CTX.drawImage(this.image, -(this.image.width/2), -(this.image.height/2));
+	game.camera.drawImage(this.img, -(this.image.width/2), -(this.image.height/2));
  
 	// and restore the co-ords to how they were when we began
 	CTX.restore(); 

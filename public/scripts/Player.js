@@ -43,7 +43,6 @@ game.Player = function(id, color, name){
 	this.inputs = function(){
 
 		if (INPUTS.getKey("up")){
-			console.log("accel" + this.speed);
 			this.speed += this.accel;
 			if (this.speed > this.maxSpeed)
 				this.speed = this.maxSpeed;
@@ -98,20 +97,20 @@ game.Player = function(id, color, name){
 	}
 	this.drawPlayer = function(CTX)
 	{
-		CTX.save()
-		CTX.translate(this.x , this.y);
+		game.camera.save()
+		game.camera.translate(this.x , this.y);
 		CTX.rotate(this.angle)
-		CTX.drawImage(imageManager.getImage("tank"+this.color),-this.w/2, -this.h/2,this.w,this.h);
-		CTX.restore();
+		game.camera.drawImage("tank" + this.color,-this.w/2, -this.h/2,this.w,this.h);
+		game.camera.restore();
 	}
 
 	this.drawCanon = function(CTX)
 	{
-		CTX.save()
-		CTX.translate(this.x , this.y);
+		game.camera.save()
+		game.camera.translate(this.x , this.y);
 		CTX.rotate(this.aimAngle)
-		CTX.drawImage(imageManager.getImage("canon"),-this.w/2, -this.h/2,this.w,this.h);
-		CTX.restore();
+		game.camera.drawImage("canon",-this.w/2, -this.h/2,this.w,this.h);
+		game.camera.restore();
 	}
 	this.shoot = function(){
 		

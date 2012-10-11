@@ -53,7 +53,7 @@ game.Map = function(level, theme, name){
 					x = this.imgWidth;
 					y = 0;
 				}
-				CTX.drawImage(imageManager.getImage(this.theme), x, y, this.imgWidth, this.imgHeight, i * this.imgWidth, j * this.imgHeight, this.imgWidth, this.imgHeight);
+				game.camera.drawImage(this.theme, x, y, this.imgWidth, this.imgHeight, i * this.imgWidth, j * this.imgHeight, this.imgWidth, this.imgHeight);
 			}
 		}
 	}
