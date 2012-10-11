@@ -19,7 +19,10 @@ game.Camera = function(width, height, gameObject, CTX){
 			var dy = sy;
 			if (dx + dw > this.x && dx < this.x + this.width && dy + dh > this.y && dy< this.y + this.height || this.saved){
 
-				this.CTX.drawImage(imageManager.getImage(img), sx - this.x, sy - this.y);
+				if (this.saved)
+					this.CTX.drawImage(imageManager.getImage(img), sx, sy);
+				else
+					this.CTX.drawImage(imageManager.getImage(img), sx - this.x, sy - this.y);
 			}			
 
 		}else if (arguments.length == 5){
