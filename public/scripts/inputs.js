@@ -46,7 +46,9 @@ window.onkeyup = function(event){
 	}
 
 }
-
+function mouseMove(event){
+	INPUTS.mousePosition = {x : (event.offsetX || event.layerX), y : (event.offsetY || event.layerY)};
+}
 INPUTS.getKey = function(key){
 
 	return INPUTS[key][1] || false;

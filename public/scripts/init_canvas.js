@@ -8,5 +8,9 @@ function initCanvas(width,height,id,game,parent){
 	parent.appendChild(canvas);
 	//document.title = gameName;
 	game.CANVAS = canvas;
+	canvas.onmousemove = function(e)
+	{
+		mouseMove(e);
+	}
 	game.CTX = canvas.getContext('2d');
 }
