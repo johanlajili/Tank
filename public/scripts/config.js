@@ -1,0 +1,1 @@
+game.rImagesPath = "images/";
