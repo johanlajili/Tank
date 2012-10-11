@@ -6,6 +6,11 @@
 	["tankGreen", "Tank/green.png"],
 	["canon", "Canon/generic.png"],
 	["Bomb", "Bomb.png"]
+	["canon", "Canon/generic.png"]
+
+
+	// Map spritesheet
+	["theme1", "theme1.png"]
 ];
 var imageManager = new NLImages;
 imageManager.imagesPath = game.rImagesPath;
