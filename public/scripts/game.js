@@ -18,7 +18,7 @@ var Game = function(){};
 var game = new Game();
 game.render = function(){
 	this.CTX.clearRect(0, 0, this.CANVAS.width, this.CANVAS.height);
-	//this.bomb.render(this.CTX);
+	this.map.render(this.CTX);
 
 	for (var i in this.players){
 		this.players[i].render(this.CTX);
@@ -32,6 +32,7 @@ game.update = function(){
 	for (var i in this.players){
 		this.players[i].update(); 
 	}
+	this.camera.update();
 }
 game.inputs = function(){
 
