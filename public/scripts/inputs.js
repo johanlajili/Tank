@@ -12,7 +12,9 @@ var keys_list = [
 	["a", 65]
 ];
 
-var INPUTS = {};
+var INPUTS = {
+	mousePosition : {x: 400, y:300}
+};
 var KEYS = [];
 function define_INPUTS(keys){
 
@@ -49,6 +51,7 @@ window.onkeyup = function(event){
 function mouseMove(event){
 	INPUTS.mousePosition = {x : (event.offsetX || event.layerX), y : (event.offsetY || event.layerY)};
 }
+
 INPUTS.getKey = function(key){
 
 	return INPUTS[key][1] || false;
