@@ -105,7 +105,7 @@ game.Player = function(id, color, name, x, y){
 	}
 	this.drawPlayer = function()
 	{
-		game.camera.save()
+		game.camera.save();
 		game.camera.translate(this.x , this.y);
 		game.camera.rotate(this.angle)
 		game.camera.drawImage("tank" + this.color,-this.w/2, -this.h/2,this.w,this.h);
@@ -114,7 +114,7 @@ game.Player = function(id, color, name, x, y){
 
 	this.drawCanon = function()
 	{
-		game.camera.save()
+		game.camera.save();
 		game.camera.translate(this.x , this.y);
 		game.camera.rotate(this.aimAngle)
 		game.camera.drawImage("canon" + this.color,-this.w/2, -this.h/2,this.w,this.h);
