@@ -5,13 +5,16 @@ game.init = function(){
 	this.players["Malharhak"] = new game.Player(13456, "Orange", "Malharhak");
 	game.player = this.players["Malharhak"];
 	game.map = new game.Map();
-	initCanvas(800, 600, "main_canvas", game, document.body);
-	game.camera = new game.Camera(game.CANVAS.width, game.CANVAS.height, game.player, game.CTX);
 	game.CANVAS.addEventListener("click", clickToShoot, false);
+	initCanvas(game.canvasWidth, game.canvasHeight, game.canvasName, game, document.body);
+	game.camera = new game.Camera(game.CANVAS.width, game.CANVAS.height, game.player, game.CTX)
 }
-window.onload = function(){
+window.onload = function(event){
+
 
 	CONTEXT = game;
 	CONTEXT.init();
+
+	resizeScreen();
 	run();
 }
