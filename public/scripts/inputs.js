@@ -69,7 +69,7 @@ INPUTS.getKey = function(key){
 function getMouseCoords(event){
 
 	var pos = {x : (event.offsetX || event.layerX), y : (event.offsetY || event.layerY)};
-	return {x : pos.x * CONTEXT.widthRatio, y : pos.y * CONTEXT.heightRatio};
+	return {x : pos.x * CONFIG.widthRatio, y : pos.y * CONFIG.heightRatio};
 }
 function resizeScreen(){
 
@@ -78,7 +78,7 @@ function resizeScreen(){
 
 	var canvasWidth = CONTEXT.CANVAS.width;
 	var canvasHeight = CONTEXT.CANVAS.height;
-	if (CONTEXT.resizeMode == "css ratio" && Date.now() - CONTEXT.lastResize > CONTEXT.resizeTimer){
+	if (CONFIG.resizeMode == "css ratio" && Date.now() - CONFIG.lastResize > CONFIG.resizeTimer){
 		var widthRatio = screenWidth / canvasWidth;
 
 		if (widthRatio * canvasHeight <= screenHeight){
@@ -103,8 +103,8 @@ function resizeScreen(){
 		}
 		CONTEXT.lastResize = Date.now();
 
-		CONTEXT.widthRatio = CONTEXT.CANVAS.width / CONTEXT.realWidth;
-		CONTEXT.heightRatio = CONTEXT.CANVAS.height / CONTEXT.realHeight
+		CONFIG.widthRatio = CONTEXT.CANVAS.width / CONTEXT.realWidth;
+		CONFIG.heightRatio = CONTEXT.CANVAS.height / CONTEXT.realHeight
 	}
 }
 window.onresize = function(event){

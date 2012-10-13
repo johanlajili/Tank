@@ -37,8 +37,9 @@ game.Player = function(id, color, name, main){
 	this.maxSpeed = 2;
 	this.minSpeed = -2;
 
-	this.x = 10;
-	this.y = 10;
+	var spawn = CONFIG.spawns[Math.floor(Math.random() * CONFIG.spawns.length)];
+	this.x = spawn.x;
+	this.y = spawn.y;
 	this.w = 83;
 	this.h = 72;
 

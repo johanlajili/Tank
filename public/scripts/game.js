@@ -41,3 +41,18 @@ game.inputs = function(){
 		this.players[i].inputs();
 	}
 }
+
+var loader = new Game();
+loader.render = function(){
+	this.CTX.clearRect(0, 0, this.CANVAS.width, this.CANVAS.height);
+	var loading = imageManager.getLoadPercentage();
+	this.CTX.font = "60px Arial";
+	this.CTX.fillText("Loading : " + loading + "%", this.CANVAS.width / 2, this.CANVAS.height / 2);
+}
+loader.update = function(){
+
+	if (imageManager.isLoaded()){
+		CONTEXT = game;
+
+	}
+}

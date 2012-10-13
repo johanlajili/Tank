@@ -24,5 +24,5 @@
 	["theme1", "theme1.png"]
 ];
 var imageManager = new NLImages;
-imageManager.imagesPath = game.rImagesPath;
+imageManager.imagesPath = CONFIG.rImagesPath;
 imageManager.pushImages(gameImages);
