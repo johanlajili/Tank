@@ -6,7 +6,8 @@ game.init = function(){
 	game.player = this.players["Malharhak"];
 	game.map = new game.Map();
 	initCanvas(800, 600, "main_canvas", game, document.body);
-	game.camera = new game.Camera(game.CANVAS.width, game.CANVAS.height, game.player, game.CTX)
+	game.camera = new game.Camera(game.CANVAS.width, game.CANVAS.height, game.player, game.CTX);
+	game.CANVAS.addEventListener("click", clickToShoot, false);
 }
 window.onload = function(){
 

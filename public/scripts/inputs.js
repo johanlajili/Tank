@@ -48,6 +48,10 @@ window.onkeyup = function(event){
 	}
 
 }
+function clickToShoot(event)
+{
+	game.player.shoot();
+}
 function mouseMove(event){
 	INPUTS.mousePosition = {x : (event.offsetX || event.layerX), y : (event.offsetY || event.layerY)};
 }
