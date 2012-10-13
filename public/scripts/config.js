@@ -6,3 +6,5 @@ game.canvasWidth = 800;
 game.canvasHeight = 600;
 game.resizeTimer = 100;
 game.lastResize = 0;
+game.widthRatio = 1;
+game.heightRatio = 1;

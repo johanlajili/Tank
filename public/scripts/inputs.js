@@ -69,7 +69,7 @@ INPUTS.getKey = function(key){
 function getMouseCoords(event){
 
 	var pos = {x : (event.offsetX || event.layerX), y : (event.offsetY || event.layerY)};
-	return {x : pos.x , y : pos.y };
+	return {x : pos.x * CONTEXT.widthRatio, y : pos.y * CONTEXT.heightRatio};
 }
 function resizeScreen(){
 
@@ -102,6 +102,9 @@ function resizeScreen(){
 			CONTEXT.CANVAS.style.marginTop = Math.floor((screenHeight - CONTEXT.realHeight) / 2) + "px";
 		}
 		CONTEXT.lastResize = Date.now();
+
+		CONTEXT.widthRatio = CONTEXT.CANVAS.width / CONTEXT.realWidth;
+		CONTEXT.heightRatio = CONTEXT.CANVAS.height / CONTEXT.realHeight
 	}
 }
 window.onresize = function(event){
