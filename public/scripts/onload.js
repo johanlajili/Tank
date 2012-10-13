@@ -2,8 +2,8 @@ game.init = function(){
 	define_INPUTS(keys_list);
 	//this.bomb = new game.Bomb(0,0,800,600,4);
 	this.players = {};
-	this.players["Malharhak"] = new game.Player(13456, "Orange", "Malharhak", 400, 400);
-	game.player = this.players["Malharhak"];
+	this.players["Dieu"] = new game.Player("Dieu", "Orange", "Malharhak");
+	game.player = this.players["Dieu"];
 	game.map = new game.Map();
 
 	initCanvas(CONFIG.canvasWidth, CONFIG.canvasHeight, CONFIG.canvasName, game, document.body);

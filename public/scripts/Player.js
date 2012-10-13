@@ -79,11 +79,16 @@ game.Player = function(id, color, name, x, y){
 	
 	this.update = function(){
 	this.aimPoint = game.camera.fromScreenToPoint(INPUTS.mousePosition.x - (this.x + this.w/2), INPUTS.mousePosition.y - (this.y + this.h/2))
-	this.aimAngle = Math.atan2(this.aimPoint.y, this.aimPoint.x);
+	this.aimAngle = this.getAimAngle();
 		this.move();
 		for (var i in this.bombs){
 			this.bombs[i].update();
 		}
+	}
+
+	this.getAimAngle = function(){
+
+		return Math.atan2(INPUTS.mousePosition.y - CONTEXT.CANVAS.height / 2, INPUTS.mousePosition.x - CONTEXT.CANVAS.width / 2);
 	}
 	this.animate = function(){
 
@@ -123,7 +128,9 @@ game.Player = function(id, color, name, x, y){
 	this.shoot = function(){
 		
 		if (game.currdate - this.lastBomb > this.bombsTimer){
-			this.bombs.push(new game.Bomb(this.x, this.y, this.aimAngle, this.aimPoint.x, this.aimPoint.y,'Bomb'));
+			var bombID = Math.floor(Math.random() * 9999);
+			this.bombs[bombID] = new game.Bomb(this.id, this.x, this.y, this.aimAngle);
+			this.bombs[bombID].id = bombID;
 			this.lastBomb = game.currdate;
 		}
 	}
@@ -137,6 +144,9 @@ game.Player = function(id, color, name, x, y){
 			this.x += Math.cos(this.angle) * this.speed;
 			this.y += Math.sin(this.angle) * this.speed;
 		}
+	}
+	this.destroyBomb = function(bid){
+		delete this.bombs[bid];
 	}
 
 
