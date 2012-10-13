@@ -31,7 +31,7 @@ game.Map = function(level, theme, name){
 	if (theme !== undefined)
 		this.theme = theme;
 	else
-		this.theme = game.defaultTheme;
+		this.theme = CONFIG.defaultTheme;
 
 	if (name !== undefined)
 		this.name = name;

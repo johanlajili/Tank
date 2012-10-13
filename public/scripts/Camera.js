@@ -59,6 +59,9 @@ game.Camera = function(width, height, gameObject, CTX){
 	this.translate = function(x, y){
 		this.CTX.translate(x - this.x, y - this.y);
 	}
+	this.rotate = function(angle){
+		this.CTX.rotate(angle);
+	}
 	this.save = function(){
 		this.saved = true;
 		this.CTX.save();

@@ -32,8 +32,9 @@ game.Player = function(id, color, name, x, y){
 	this.maxSpeed = 2;
 	this.minSpeed = -2;
 
-	this.x = 100;
-	this.y = 100;
+	var spawn = CONFIG.spawns[Math.floor(Math.random() * CONFIG.spawns.length)];
+	this.x = spawn.x;
+	this.y = spawn.y;
 	this.w = 83;
 	this.h = 72;
 
@@ -89,29 +90,35 @@ game.Player = function(id, color, name, x, y){
 	}
 	this.render = function(CTX){
 
-		this.drawPlayer(CTX);
+		this.drawPlayer();
 		for (var i in this.bombs){
 			this.bombs[i].render(CTX);
 		}
 		this.drawCanon(CTX);
 		game.minimap.draw({type:"player", x:this.x, y:this.y, w:this.w/2, h:this.h})
+		this.drawTarget(CTX);
 	}
-	this.drawPlayer = function(CTX)
+	this.drawPlayer = function()
 	{
 		game.camera.save()
 		game.camera.translate(this.x , this.y);
-		CTX.rotate(this.angle)
+		game.camera.rotate(this.angle)
 		game.camera.drawImage("tank" + this.color,-this.w/2, -this.h/2,this.w,this.h);
 		game.camera.restore();
 	}
 
-	this.drawCanon = function(CTX)
+	this.drawCanon = function()
 	{
 		game.camera.save()
 		game.camera.translate(this.x , this.y);
-		CTX.rotate(this.aimAngle)
+		game.camera.rotate(this.aimAngle)
 		game.camera.drawImage("canon" + this.color,-this.w/2, -this.h/2,this.w,this.h);
 		game.camera.restore();
+	}
+	this.drawTarget = function(CTX){
+		
+		CTX.drawImage(imageManager.getImage("crossHair" + this.color), INPUTS.mousePosition.x - imageManager.getImageSize("crossHair" + this.color).x / 2, INPUTS.mousePosition.y - imageManager.getImageSize("crossHair" + this.color).y / 2);
+
 	}
 	this.shoot = function(){
 		
