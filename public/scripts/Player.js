@@ -95,29 +95,35 @@ game.Player = function(id, color, name, main){
 	}
 	this.render = function(CTX){
 
-		this.drawPlayer(CTX);
+		this.drawPlayer();
 		for (var i in this.bombs){
 			this.bombs[i].render(CTX);
 		}
-		this.drawCanon(CTX);
+		this.drawCanon();
+		this.drawTarget(CTX);
 
 	}
-	this.drawPlayer = function(CTX)
+	this.drawPlayer = function()
 	{
 		game.camera.save()
 		game.camera.translate(this.x , this.y);
-		CTX.rotate(this.angle)
+		game.camera.rotate(this.angle)
 		game.camera.drawImage("tank" + this.color,-this.w/2, -this.h/2,this.w,this.h);
 		game.camera.restore();
 	}
 
-	this.drawCanon = function(CTX)
+	this.drawCanon = function()
 	{
 		game.camera.save()
 		game.camera.translate(this.x , this.y);
-		CTX.rotate(this.aimAngle)
+		game.camera.rotate(this.aimAngle)
 		game.camera.drawImage("canon" + this.color,-this.w/2, -this.h/2,this.w,this.h);
 		game.camera.restore();
+	}
+	this.drawTarget = function(CTX){
+		
+		CTX.drawImage(imageManager.getImage("crossHair" + this.color), INPUTS.mousePosition.x - imageManager.getImageSize("crossHair" + this.color).x / 2, INPUTS.mousePosition.y - imageManager.getImageSize("crossHair" + this.color).y / 2);
+
 	}
 	this.shoot = function(){
 		
