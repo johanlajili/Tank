@@ -96,10 +96,10 @@ game.Player = function(id, color, name, main){
 	this.render = function(CTX){
 
 		this.drawPlayer(CTX);
-		this.drawCanon(CTX);
 		for (var i in this.bombs){
 			this.bombs[i].render(CTX);
 		}
+		this.drawCanon(CTX);
 
 	}
 	this.drawPlayer = function(CTX)
@@ -116,7 +116,7 @@ game.Player = function(id, color, name, main){
 		game.camera.save()
 		game.camera.translate(this.x , this.y);
 		CTX.rotate(this.aimAngle)
-		game.camera.drawImage("canon",-this.w/2, -this.h/2,this.w,this.h);
+		game.camera.drawImage("canon" + this.color,-this.w/2, -this.h/2,this.w,this.h);
 		game.camera.restore();
 	}
 	this.shoot = function(){
