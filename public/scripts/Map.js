@@ -17,11 +17,11 @@ game.Map = function(level, theme, name){
 			for (var j = 0; j < this.height; j++){
 
 				this.level[i][j] = "o";
-				if (i == 0 || j == 0 || i == this.width - 1 || j == this.height - 1){
-					this.level[i][j] = "x";
-				}
 				if (Math.floor(Math.random() *  50) == 2){
 					this.level[i][j] = "w";
+				}
+				if (i == 0 || j == 0 || i == this.width - 1 || j == this.height - 1){
+					this.level[i][j] = "x";
 				}
 			}
 		}
@@ -54,6 +54,7 @@ game.Map = function(level, theme, name){
 					y = 0;
 				}
 				game.camera.drawImage(this.theme, x, y, this.imgWidth, this.imgHeight, i * this.imgWidth, j * this.imgHeight, this.imgWidth, this.imgHeight);
+				if (x!=0) game.minimap.draw({type:"block", x:i * this.imgWidth, y:j * this.imgHeight, w:this.imgWidth, h:this.imgHeight})
 			}
 		}
 	}

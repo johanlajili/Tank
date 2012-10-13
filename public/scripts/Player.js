@@ -1,4 +1,4 @@
-game.Player = function(id, color, name, main){
+game.Player = function(id, color, name, x, y){
 
 	if (id !== undefined)
 		this.id = id;
@@ -16,11 +16,6 @@ game.Player = function(id, color, name, main){
 	else
 		this.name = "Kévin";
 
-	if (main !== undefined)
-		this.main = main;
-	else
-		this.main = false;
-
 	this.sprite = "player.png";
 	this.anims = {
 		"walk" : {
@@ -37,8 +32,8 @@ game.Player = function(id, color, name, main){
 	this.maxSpeed = 2;
 	this.minSpeed = -2;
 
-	this.x = 10;
-	this.y = 10;
+	this.x = 100;
+	this.y = 100;
 	this.w = 83;
 	this.h = 72;
 
@@ -80,7 +75,6 @@ game.Player = function(id, color, name, main){
 			this.shoot();
 		}
 	}
-		//game.CANVAS.addEventListener("click", this.shoot, false); 
 	
 	this.update = function(){
 	this.aimPoint = game.camera.fromScreenToPoint(INPUTS.mousePosition.x - (this.x + this.w/2), INPUTS.mousePosition.y - (this.y + this.h/2))
@@ -100,7 +94,7 @@ game.Player = function(id, color, name, main){
 			this.bombs[i].render(CTX);
 		}
 		this.drawCanon(CTX);
-
+		game.minimap.draw({type:"player", x:this.x, y:this.y, w:this.w/2, h:this.h})
 	}
 	this.drawPlayer = function(CTX)
 	{
