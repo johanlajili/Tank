@@ -125,7 +125,6 @@ var Stats = function () {
 				fpsMax = Math.max( fpsMax, fps );
 
 				fpsText.textContent = fps + ' FPS (' + fpsMin + '-' + fpsMax + ')';
-				speedText.innerHTML = "Speed : " + SPEED + "%";
 				
 				updateGraph( fpsGraph, Math.min( 30, 30 - ( fps / 100 ) * 30 ) );
 
@@ -147,3 +146,13 @@ var Stats = function () {
 	}
 	
 };
+
+var stats = new Stats();
+stats.setMode(0); // 0: fps, 1: ms
+
+// Align top-left
+stats.domElement.style.position = 'absolute';
+stats.domElement.style.left = '0px';
+stats.domElement.style.top = '0px';
+
+document.body.appendChild( stats.domElement );
