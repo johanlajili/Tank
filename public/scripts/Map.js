@@ -19,9 +19,12 @@ game.Map = function(level, theme, name){
 				this.level[i][j] = "o";
 				if (Math.floor(Math.random() *  50) == 2){
 					this.level[i][j] = "w";
+					game.physics.createFixeBlock(i*this.imgWidth+this.imgWidth/2, j*this.imgHeight+this.imgHeight/2, this.imgWidth/2, this.imgHeight/2)
 				}
+				else
 				if (i == 0 || j == 0 || i == this.width - 1 || j == this.height - 1){
 					this.level[i][j] = "x";
+					game.physics.createFixeBlock(i*this.imgWidth+this.imgWidth/2, j*this.imgHeight+this.imgHeight/2, this.imgWidth/2, this.imgHeight/2)
 				}
 			}
 		}
