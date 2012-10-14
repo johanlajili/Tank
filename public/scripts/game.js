@@ -27,8 +27,7 @@ game.render = function(){
 game.animate = function(){
 }
 game.update = function(){
-
-	//this.bomb.update();
+	this.physics.update();
 	for (var i in this.players){
 		this.players[i].update(); 
 	}

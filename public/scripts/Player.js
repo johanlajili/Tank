@@ -26,8 +26,8 @@ game.Player = function(id, color, name, x, y){
 	this.angle = 0;
 	this.aimAngle = 0; // angle de tir, en radian
 	this.aimPoint = {x: 0, y:0}
-	this.speed = 0;
-	this.accel = 0.5;
+	this.speed = 1;
+	this.accel = 1;
 	this.angleTick = 0.05;
 	this.maxSpeed = 2;
 	this.minSpeed = -2;
@@ -41,6 +41,8 @@ game.Player = function(id, color, name, x, y){
 	this.bombs = [];
 	this.bombsTimer = 100;
 	this.lastBomb = Date.now();
+
+	this.rigidBody = game.physics.createTank(this.x+this.w/2, this.y+this.h/2, this.w/2, this.h/2).GetBody();
 	this.inputs = function(){
 
 		if (INPUTS.getKey("up")){
@@ -71,6 +73,8 @@ game.Player = function(id, color, name, x, y){
 			this.angle += this.angleTick;
 		}
 		this.angle %= Math.PI * 2;
+		this.rigidBody.SetAngle (this.angle);
+		this.rigidBody.SetAngularVelocity(0); // pour éviter que la rotation du tank parte en danseuse étoile
 
 		if (INPUTS.getKey("space")){
 			this.shoot();
@@ -80,7 +84,7 @@ game.Player = function(id, color, name, x, y){
 	this.update = function(){
 	this.aimPoint = game.camera.fromScreenToPoint(INPUTS.mousePosition.x - (this.x + this.w/2), INPUTS.mousePosition.y - (this.y + this.h/2))
 	this.aimAngle = this.getAimAngle();
-		this.move();
+	this.move();
 		for (var i in this.bombs){
 			this.bombs[i].update();
 		}
@@ -94,7 +98,9 @@ game.Player = function(id, color, name, x, y){
 
 	}
 	this.render = function(CTX){
-
+		this.angle = this.rigidBody.GetAngle(); // on met à jour avec les infos du moteur physique
+		this.x = pixels(this.rigidBody.GetPosition().x); // idem
+		this.y = pixels(this.rigidBody.GetPosition().y);// idem
 		this.drawPlayer();
 		for (var i in this.bombs){
 			this.bombs[i].render(CTX);
@@ -139,11 +145,7 @@ game.Player = function(id, color, name, x, y){
 	}
 	this.move = function(){
 
-		if (this.speed != 0 && this.checkCollision()){
-
-			this.x += Math.cos(this.angle) * this.speed;
-			this.y += Math.sin(this.angle) * this.speed;
-		}
+			this.rigidBody.SetLinearVelocity({x: Math.cos(this.angle) * this.speed, y:Math.sin(this.angle) * this.speed})
 	}
 	this.destroyBomb = function(bid){
 		delete this.bombs[bid];
