@@ -25,6 +25,7 @@ game.render = function(){
 	this.minimap.render()
 }
 game.animate = function(){
+	
 }
 game.update = function(){
 	this.physics.update();
