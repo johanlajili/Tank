@@ -5,23 +5,33 @@ game.Bomb = function(pId, x,y,angle){
 	this.pId = pId;
 	this.angle = angle
 	
-	this.speed = 4;
+	this.speed = 0.005;
 	this.nb = 0;
 
 	this.img = "Bomb";
 	this.image = imageManager.getImage(this.img);
 	this.width = this.image.width;
 	this.height = this.image.height;
-
-	this.life = 3000;
+	this.destroyed = false;
+	this.life = 2;
 	this.start = Date.now();
 	// rotate around that point, converting our 
 	// angle from degrees to radians
 	
 	//this.collider = collider;
+	this.rigidBody = game.physics.createBullet(this.x, this.y, this.width/2, this).GetBody();
+	this.rigidBody.ApplyImpulse ({x: this.speed*Math.cos(this.angle), y: this.speed*Math.sin(this.angle)}, {x:0,y:0});
 }
 
+game.Bomb.prototype.onCollision = function(other)
+{
+	this.life--;
+	if (this.life ==0) {this.destroyed = true}
+}
 game.Bomb.prototype.render = function(CTX) {
+	this.angle = this.rigidBody.GetAngle();
+	this.x = pixels(this.rigidBody.GetPosition().x); // idem
+	this.y = pixels(this.rigidBody.GetPosition().y);// idem
 	// save the current co-ordinate system 
 	// before we screw with it
 	game.camera.save(); 
@@ -42,15 +52,22 @@ game.Bomb.prototype.render = function(CTX) {
 	
 };
 game.Bomb.prototype.update = function() {
-
+	console.log(this.rigidBody.SetAngularVelocity(0))
+	if (this.destroyed)
+	{
+		this.destroy();
+	}
+	/*
 	//this.nb += this.speed;
 	this.x += this.speed * Math.cos(this.angle);
 	this.y += this.speed * Math.sin(this.angle);
 	if (CONTEXT.currdate - this.start > this.life)
 		this.destroy();
+	*/
 };
 game.Bomb.prototype.destroy = function(){
-
+	game.physics.world.DestroyBody(this.rigidBody);
 	var p = CONTEXT.players[this.pId];
 	p.destroyBomb(this.bid);
+
 }
