@@ -1,11 +1,11 @@
-game.Bomb = function(pId, x,y,angle){
+game.Bomb = function(pId, x,y,angle,speedPlus){
 
 	this.x = x;
 	this.y = y;
 	this.pId = pId;
 	this.angle = angle
 	
-	this.speed = 4;
+	this.speed = 4 + speedPlus;
 	this.nb = 0;
 
 	this.img = "Bomb";
