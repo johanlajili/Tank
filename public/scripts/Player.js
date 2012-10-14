@@ -31,6 +31,7 @@ game.Player = function(id, color, name, x, y){
 	this.angleTick = 0.05;
 	this.maxSpeed = 2;
 	this.minSpeed = -2;
+	this.type = "player";
 
 	var spawn = CONFIG.spawns[Math.floor(Math.random() * CONFIG.spawns.length)];
 	this.x = spawn.x;
@@ -42,7 +43,7 @@ game.Player = function(id, color, name, x, y){
 	this.bombsTimer = 100;
 	this.lastBomb = Date.now();
 
-	this.rigidBody = game.physics.createTank(this.x+this.w/2, this.y+this.h/2, this.w/2, this.h/2).GetBody();
+	this.rigidBody = game.physics.createTank(this.x+this.w/2, this.y+this.h/2, this.w/2, this.h/2, this).GetBody();
 	this.inputs = function(){
 
 		if (INPUTS.getKey("up")){
@@ -139,6 +140,12 @@ game.Player = function(id, color, name, x, y){
 	}
 	this.checkCollision = function(){
 		return true;
+	}
+	this.getHit = function(pId){
+		var message = this.name + " a été touché par " + pId;
+		if (pId == this.pId)
+			message = this.name + " s'est suicidé";
+		game.scoreMessages.add(message);
 	}
 	this.move = function(){
 

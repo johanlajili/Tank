@@ -4,6 +4,7 @@ game.Bomb = function(pId, x,y,angle, velocity){
 	this.y = y;
 	this.pId = pId;
 	this.angle = angle
+	this.type = "bomb";
 
 	this.speed = 0.01;
 	this.nb = 0;
@@ -27,7 +28,12 @@ game.Bomb = function(pId, x,y,angle, velocity){
 game.Bomb.prototype.onCollision = function(other)
 {
 	this.life--;
-	if (this.life ==0) {this.destroyed = true}
+	if (this.life ==0){
+		this.destroyed = true;
+	}
+	if (other.m_userData.type == "player"){
+		other.m_userData.getHit(this.pId);
+	}
 }
 game.Bomb.prototype.render = function(CTX) {
 	// save the current co-ordinate system 
