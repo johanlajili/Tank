@@ -74,7 +74,7 @@ game.Player = function(id, color, name, x, y){
 		}
 		this.angle %= Math.PI * 2;
 		this.rigidBody.SetAngle (this.angle);
-		this.rigidBody.SetAngularVelocity(0); // pour éviter que la rotation du tank parte en danseuse étoile
+		this.rigidBody.SetAngularVelocity(); // pour éviter que la rotation du tank parte en danseuse étoile
 
 		if (INPUTS.getKey("space")){
 			this.shoot();
@@ -98,9 +98,6 @@ game.Player = function(id, color, name, x, y){
 
 	}
 	this.render = function(CTX){
-		this.angle = this.rigidBody.GetAngle(); // on met à jour avec les infos du moteur physique
-		this.x = pixels(this.rigidBody.GetPosition().x); // idem
-		this.y = pixels(this.rigidBody.GetPosition().y);// idem
 		this.drawPlayer();
 		for (var i in this.bombs){
 			this.bombs[i].render(CTX);
@@ -146,6 +143,9 @@ game.Player = function(id, color, name, x, y){
 	this.move = function(){
 
 			this.rigidBody.SetLinearVelocity({x: Math.cos(this.angle) * this.speed, y:Math.sin(this.angle) * this.speed})
+			this.angle = this.rigidBody.GetAngle(); // on met à jour avec les infos du moteur physique
+			this.x = pixels(this.rigidBody.GetPosition().x); // idem
+			this.y = pixels(this.rigidBody.GetPosition().y);// idem
 	}
 	this.destroyBomb = function(bid){
 		delete this.bombs[bid];

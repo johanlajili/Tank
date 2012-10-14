@@ -30,9 +30,6 @@ game.Bomb.prototype.onCollision = function(other)
 	if (this.life ==0) {this.destroyed = true}
 }
 game.Bomb.prototype.render = function(CTX) {
-	this.angle = this.rigidBody.GetAngle();
-	this.x = pixels(this.rigidBody.GetPosition().x); // idem
-	this.y = pixels(this.rigidBody.GetPosition().y);// idem
 	// save the current co-ordinate system 
 	// before we screw with it
 	game.camera.save(); 
@@ -53,7 +50,10 @@ game.Bomb.prototype.render = function(CTX) {
 	
 };
 game.Bomb.prototype.update = function() {
-	console.log(this.rigidBody.SetAngularVelocity(0))
+	this.rigidBody.SetAngularVelocity(0);
+	this.angle = this.rigidBody.GetAngle();
+	this.x = pixels(this.rigidBody.GetPosition().x); // idem
+	this.y = pixels(this.rigidBody.GetPosition().y);// idem
 	if (this.destroyed)
 	{
 		this.destroy();
