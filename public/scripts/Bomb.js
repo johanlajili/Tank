@@ -16,6 +16,7 @@ game.Bomb = function(pId, x,y,angle, velocity){
 	this.destroyed = false;
 	this.life = 2;
 	this.start = Date.now();
+	this.ghostMode = 10;
 	// rotate around that point, converting our 
 	// angle from degrees to radians
 	
@@ -27,7 +28,6 @@ game.Bomb = function(pId, x,y,angle, velocity){
 
 game.Bomb.prototype.onCollision = function(other)
 {
-	console.log("Bomb collision");
 	this.life--;
 	if (this.life ==0){
 		this.destroyed = true;
@@ -57,6 +57,16 @@ game.Bomb.prototype.render = function(CTX) {
 	
 };
 game.Bomb.prototype.update = function() {
+	if (this.ghostMode > 0)
+	this.ghostMode--;
+	if (this.ghostMode == 0)
+	{
+	var filter = this.rigidBody.GetFixtureList().GetFilterData();
+	filter.categoryBits   = CONFIG.bulletBit;
+	this.ghostMode--;
+	this.rigidBody.GetFixtureList().SetFilterData(filter);
+	}
+
 	this.rigidBody.SetAngularVelocity(0);
 	this.angle = this.rigidBody.GetAngle();
 	this.x = pixels(this.rigidBody.GetPosition().x); // idem

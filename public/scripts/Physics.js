@@ -46,6 +46,7 @@ game.Physics = function(){
          fixDef.shape = new this.b2PolygonShape;
          fixDef.shape.SetAsBox(metre(w), metre(h));
          fixDef.filter.categoryBits   = CONFIG.wallBit;
+         fixDef.filter.maskBits = -1;
          this.world.CreateBody(bodyDef).CreateFixture(fixDef);
       }
 
@@ -64,7 +65,7 @@ game.Physics = function(){
          fixDef.shape = new this.b2PolygonShape;
          fixDef.shape.SetAsBox(metre(w), metre(h));
          fixDef.filter.categoryBits   = CONFIG.tankBit;
-         fixDef.filter.maskBits       = CONFIG.wallBit; 
+         fixDef.filter.maskBits       = CONFIG.wallBit | CONFIG.bulletBit; 
         
        return(this.world.CreateBody(bodyDef).CreateFixture(fixDef));
       }
@@ -81,8 +82,8 @@ game.Physics = function(){
          bodyDef.position.y = metre(posY); 
          bodyDef.userData = bullet;
          fixDef.shape = new this.b2CircleShape(metre(rayon));
-         fixDef.filter.categoryBits   = CONFIG.bulletBit; 
-         fixDef.filter.maskBits       = ~CONFIG.tankBit & CONFIG.wallBit;
+         fixDef.filter.categoryBits   = 0; 
+         fixDef.filter.maskBits       = CONFIG.tankBit | CONFIG.wallBit;
        return(this.world.CreateBody(bodyDef).CreateFixture(fixDef));
       }
 
