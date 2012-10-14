@@ -31,6 +31,7 @@ game.Player = function(id, color, name, x, y){
 	this.angleTick = 0.05;
 	this.maxSpeed = 2;
 	this.minSpeed = -2;
+	this.type = "player";
 
 	var spawn = CONFIG.spawns[Math.floor(Math.random() * CONFIG.spawns.length)];
 	this.x = spawn.x;
@@ -42,7 +43,7 @@ game.Player = function(id, color, name, x, y){
 	this.bombsTimer = 100;
 	this.lastBomb = Date.now();
 
-	this.rigidBody = game.physics.createTank(this.x+this.w/2, this.y+this.h/2, this.w/2, this.h/2).GetBody();
+	this.rigidBody = game.physics.createTank(this.x+this.w/2, this.y+this.h/2, this.w/2, this.h/2, this).GetBody();
 	this.inputs = function(){
 
 		if (INPUTS.getKey("up")){
@@ -74,7 +75,7 @@ game.Player = function(id, color, name, x, y){
 		}
 		this.angle %= Math.PI * 2;
 		this.rigidBody.SetAngle (this.angle);
-		this.rigidBody.SetAngularVelocity(0); // pour éviter que la rotation du tank parte en danseuse étoile
+		this.rigidBody.SetAngularVelocity(); // pour éviter que la rotation du tank parte en danseuse étoile
 
 		if (INPUTS.getKey("space")){
 			this.shoot();
@@ -98,9 +99,6 @@ game.Player = function(id, color, name, x, y){
 
 	}
 	this.render = function(CTX){
-		this.angle = this.rigidBody.GetAngle(); // on met à jour avec les infos du moteur physique
-		this.x = pixels(this.rigidBody.GetPosition().x); // idem
-		this.y = pixels(this.rigidBody.GetPosition().y);// idem
 		this.drawPlayer();
 		for (var i in this.bombs){
 			this.bombs[i].render(CTX);
@@ -143,9 +141,18 @@ game.Player = function(id, color, name, x, y){
 	this.checkCollision = function(){
 		return true;
 	}
+	this.getHit = function(pId){
+		var message = this.name + " a été touché par " + pId;
+		if (pId == this.pId)
+			message = this.name + " s'est suicidé";
+		game.scoreMessages.add(message);
+	}
 	this.move = function(){
 
 			this.rigidBody.SetLinearVelocity({x: Math.cos(this.angle) * this.speed, y:Math.sin(this.angle) * this.speed})
+			this.angle = this.rigidBody.GetAngle(); // on met à jour avec les infos du moteur physique
+			this.x = pixels(this.rigidBody.GetPosition().x); // idem
+			this.y = pixels(this.rigidBody.GetPosition().y);// idem
 	}
 	this.destroyBomb = function(bid){
 		delete this.bombs[bid];
