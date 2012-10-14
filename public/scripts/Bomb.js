@@ -1,11 +1,11 @@
-game.Bomb = function(pId, x,y,angle){
+game.Bomb = function(pId, x,y,angle, velocity){
 
 	this.x = x;
 	this.y = y;
 	this.pId = pId;
 	this.angle = angle
-	
-	this.speed = 0.005;
+
+	this.speed = 0.01;
 	this.nb = 0;
 
 	this.img = "Bomb";
@@ -20,6 +20,7 @@ game.Bomb = function(pId, x,y,angle){
 	
 	//this.collider = collider;
 	this.rigidBody = game.physics.createBullet(this.x, this.y, this.width/2, this).GetBody();
+	this.rigidBody.SetLinearVelocity(velocity)
 	this.rigidBody.ApplyImpulse ({x: this.speed*Math.cos(this.angle), y: this.speed*Math.sin(this.angle)}, {x:0,y:0});
 }
 
