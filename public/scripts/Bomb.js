@@ -27,6 +27,7 @@ game.Bomb = function(pId, x,y,angle, velocity){
 
 game.Bomb.prototype.onCollision = function(other)
 {
+	console.log("Bomb collision");
 	this.life--;
 	if (this.life ==0){
 		this.destroyed = true;
