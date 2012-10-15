@@ -24,9 +24,42 @@ app.get('/', function(req, res){
 });
 
 
+var players = {};
+
+var lastLog = Date.now();
+var logTimer = 1000;
+
+var playerTimeout = 5000;
+var CURRDATE = Date.now();
 io.sockets.on('connection', function(socket){
 	socket.emit('message', {hello: 'world'});
-	socket.on('message', function(data){
-		console.log(data);
+	socket.on('playerPing', function(data){
+		if (Date.now() - lastLog > logTimer){
+			console.log(data);
+			lastLog = Date.now();
+		}
+		players[data.id] = data;
+		players[data.id].lastPing = CURRDATE;
 	});
 });
+
+var sendDatas = function(){
+
+	CURRDATE = Date.now();
+	io.sockets.emit('serverPing', players);
+		if (Date.now() - lastLog > logTimer){
+			console.log("Datas sent to clients");
+			lastLog = Date.now();
+		}
+
+	for (var i in players){
+		if (CURRDATE - players[i].lastPing > playerTimeout){
+			console.log("Destroyed : " + i);
+			io.sockets.emit('destroyPlayer', i);
+			delete players[i];
+		}
+	}
+	setTimeout(sendDatas, 60);
+}
+
+sendDatas();

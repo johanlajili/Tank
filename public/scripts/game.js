@@ -1,5 +1,5 @@
 var Game = function(){};
-
+	
 	Game.prototype.inputs = function(){
 
 	}

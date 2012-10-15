@@ -17,7 +17,7 @@ game.Map = function(level, theme, name){
 			for (var j = 0; j < this.height; j++){
 
 				this.level[i][j] = "o";
-				if (Math.floor(Math.random() *  50) == 2){
+				if (Math.floor(Math.random() *  20) == 2){
 					this.level[i][j] = "w";
 					game.physics.createFixeBlock(i*this.imgWidth+this.imgWidth/2, j*this.imgHeight+this.imgHeight/2, this.imgWidth/2, this.imgHeight/2)
 				}
