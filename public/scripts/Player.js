@@ -142,8 +142,8 @@ game.Player = function(id, color, name, x, y){
 		return true;
 	}
 	this.getHit = function(pId){
-		var message = this.name + " a été touché par " + pId;
-		if (pId == this.pId)
+		var message = this.name + " a été touché par " + CONTEXT.players[pId].name;
+		if (pId == this.id)
 			message = this.name + " s'est suicidé";
 		game.scoreMessages.add(message);
 	}
