@@ -6,6 +6,7 @@
 	["tankGreen", "Tank/green.png"],
 	["tankBlue", "Tank/blue.png"],
 	["tankRed", "Tank/red.png"],
+	//lol
 
 	["canonOrange", "Canon/orange.png"],
 	["canonRed", "Canon/red.png"],
