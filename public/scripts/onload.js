@@ -20,14 +20,18 @@ game.init = function(){
 	game.camera = new game.Camera(game.CANVAS.width, game.CANVAS.height, game.player, game.CTX);
 	game.CANVAS.addEventListener("click", clickToShoot, false);
 	game.camera = new game.Camera(game.CANVAS.width, game.CANVAS.height, game.player, game.CTX)
-}
-window.onload = function(event){
 	game.ready = false;
-	game.init();
-	CONTEXT = loader;
-	resizeScreen();
 	game.socket = io.connect('http://localhost:1337');
 	game.initSockets();
 	game.ready = true;
-	run();
+}
+window.onload = function(event){
+	menu.CANVAS;
+	menu.CTX;
+	menu.isInit = false;
+	menu.init();
+	CONTEXT = menu;
+	resizeScreen();
+	runMenu();
+	
 }

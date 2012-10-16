@@ -1,12 +1,11 @@
 var menu = new Game();
-
-menu.isInit = false;
 menu.init = function(){
+	initCanvas(CONFIG.canvasWidth, CONFIG.canvasHeight, CONFIG.canvasName, menu, document.body);
 	this.listButtons = [];
 	this.listButtons.push(new Button(this.CANVAS.width/2,2*this.CANVAS.height/4,"Play",50,this.CTX));
 	this.isInit = true;
 	this.title = new Title(this.CANVAS.width/2,this.CANVAS.height/4,"TANK",200,this.CTX)
-	this.CANVAS.addEventListener("click",this.actions(),false);
+	this.CANVAS.addEventListener("click",this.actions(event),false);
 }
 menu.render = function(){
 	this.CTX.clearRect(0, 0, this.CANVAS.width, this.CANVAS.height);
@@ -26,6 +25,7 @@ menu.actions = function(event){
 			case 0:
 				if(button.checkClick(x,y)){
 					CONFIG.displayMenu = false;
+					game.init();
 				}
 				break;
 		}

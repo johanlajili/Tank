@@ -52,11 +52,7 @@ loader.render = function(){
 loader.update = function(){
 
 	if (imageManager.isLoaded()){
-		if(CONFIG.displayMenu){
-			CONTEXT = menu;
-		}else{
-			CONTEXT = game;
-		}
+		CONTEXT = game;
 		
 
 	}
