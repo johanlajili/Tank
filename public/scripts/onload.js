@@ -3,8 +3,9 @@ game.init = function(){
 	//this.bomb = new game.Bomb(0,0,800,600,4);
 	game.physics = new game.Physics();
 	this.players = {};
-	this.players["Dieu"] = new game.Player("Dieu", "Orange", "Malharhak");
-	game.player = this.players["Dieu"];
+	var name = Math.floor(Math.random() * 99999999);
+	this.players[name] = new game.Player(name, "Orange", name );
+	game.player = this.players[name];
 	
 	game.map = new game.Map();
 
@@ -21,9 +22,12 @@ game.init = function(){
 	game.camera = new game.Camera(game.CANVAS.width, game.CANVAS.height, game.player, game.CTX)
 }
 window.onload = function(event){
-
+	game.ready = false;
 	game.init();
 	CONTEXT = loader;
 	resizeScreen();
+	game.socket = io.connect('http://localhost:1337');
+	game.initSockets();
+	game.ready = true;
 	run();
 }

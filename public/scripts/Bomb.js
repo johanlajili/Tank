@@ -1,39 +1,62 @@
-game.Bomb = function(pId, x,y,angle, velocity){
+game.Bomb = function(pId, x,y,angle, velocity, bid){
 
 	this.x = x;
 	this.y = y;
 	this.pId = pId;
 	this.angle = angle
 	this.type = "bomb";
-
+	this.bid = bid;
 	this.speed = 0.01;
 	this.nb = 0;
 
 	this.img = "Bomb";
-	this.image = imageManager.getImage(this.img);
-	this.width = this.image.width;
-	this.height = this.image.height;
+	//this.image = imageManager.getImage(this.img);
+	this.width = imageManager.getImageSize(this.img).x;
+	this.height = imageManager.getImageSize(this.img).y;
 	this.destroyed = false;
 	this.life = 2;
 	this.start = Date.now();
+	this.ghostMode = 10;
+	this.velocity = velocity;
 	// rotate around that point, converting our 
 	// angle from degrees to radians
 	
 	//this.collider = collider;
-	this.rigidBody = game.physics.createBullet(this.x, this.y, this.width/2, this).GetBody();
-	this.rigidBody.SetLinearVelocity(velocity)
-	this.rigidBody.ApplyImpulse ({x: this.speed*Math.cos(this.angle), y: this.speed*Math.sin(this.angle)}, {x:0,y:0});
+	this.initPhysics();
+	this.getRigidBody().SetLinearVelocity(velocity)
+	this.getRigidBody().ApplyImpulse ({x: this.speed*Math.cos(this.angle), y: this.speed*Math.sin(this.angle)}, {x:0,y:0});
 }
 
+game.Bomb.prototype.getBombDatas = function(){
+	var b = {
+
+		"x" : this.x,
+		"y" : this.y,
+		"pId" : this.pId,
+		"bid" : this.bid,
+		"angle" : this.angle,
+		"type" : this.type,
+		"speed" : this.speed,
+		"life" : this.life,
+		"destroyed" : this.destroyed,
+		"start" : this.start,
+		"ghostMode" : this.ghostMode,
+		"velocity" : this.velocity
+	};
+	return b;
+}
 game.Bomb.prototype.onCollision = function(other)
 {
-	console.log("Bomb collision");
+
 	this.life--;
+	console.log('?');
 	if (this.life ==0){
 		this.destroyed = true;
 	}
 	if (other.m_userData.type == "player"){
-		other.m_userData.getHit(this.pId);
+		console.log(this.pId);
+		console.log(other.m_userData);
+		CONTEXT.players[other.m_userData.id].getHit(this.pId);
 	}
 }
 game.Bomb.prototype.render = function(CTX) {
@@ -50,17 +73,27 @@ game.Bomb.prototype.render = function(CTX) {
  
 	// draw it up and to the left by half the width
 	// and height of the image 
-	game.camera.drawImage(this.img, -(this.image.width/2), -(this.image.height/2));
+	game.camera.drawImage(this.img, -(this.width/2), -(this.height/2));
  
 	// and restore the co-ords to how they were when we began
 	game.camera.restore(); 
 	
 };
 game.Bomb.prototype.update = function() {
-	this.rigidBody.SetAngularVelocity(0);
-	this.angle = this.rigidBody.GetAngle();
-	this.x = pixels(this.rigidBody.GetPosition().x); // idem
-	this.y = pixels(this.rigidBody.GetPosition().y);// idem
+	if (this.ghostMode > 0)
+	this.ghostMode--;
+	if (this.ghostMode == 0)
+	{
+	var filter = this.getRigidBody().GetFixtureList().GetFilterData();
+	filter.categoryBits   = CONFIG.bulletBit;
+	this.ghostMode--;
+	this.getRigidBody().GetFixtureList().SetFilterData(filter);
+	}
+
+	this.getRigidBody().SetAngularVelocity(0);
+	this.angle = this.getRigidBody().GetAngle();
+	this.x = pixels(this.getRigidBody().GetPosition().x); // idem
+	this.y = pixels(this.getRigidBody().GetPosition().y);// idem
 	if (this.destroyed)
 	{
 		this.destroy();
@@ -73,8 +106,17 @@ game.Bomb.prototype.update = function() {
 		this.destroy();
 	*/
 };
+
+game.Bomb.prototype.initPhysics = function(){
+	game.physics.createBomb(this.x, this.y, this.width/2, {"type" : "bomb", "bid" : this.bid, "pId" : this.pId, "onCollision" : this.onCollision});
+
+}
+
+game.Bomb.prototype.getRigidBody = function(){
+	return CONTEXT.physics.players[this.pId].bombs[this.bid];
+}
 game.Bomb.prototype.destroy = function(){
-	game.physics.world.DestroyBody(this.rigidBody);
+	game.physics.world.DestroyBody(this.getRigidBody());
 	var p = CONTEXT.players[this.pId];
 	p.destroyBomb(this.bid);
 

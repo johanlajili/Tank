@@ -12,8 +12,7 @@ CONFIG.heightRatio = 1;
 CONFIG.debug = true;
 CONFIG.wallBit = 0x0001;
 CONFIG.tankBit = 0x0002;
-CONFIG.bulletBit = 0x0004;
-CONFIG.displayMenu = true;
+CONFIG.bombBit = 0x0004;
 
 CONFIG.spawns = [];
 for (var i = 1; i < 15; i++){
