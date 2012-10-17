@@ -22,7 +22,9 @@
 
 	["Bomb", "Bomb.png"],
 	// Map spritesheet
-	["theme1", "theme1.png"]
+	["theme1", "theme1.png"],
+	["logo", "Logo.png"],
+	["backgroundMenu", "backgroundMenu.png"]
 ];
 var imageManager = new NLImages;
 imageManager.imagesPath = CONFIG.rImagesPath;
