@@ -24,7 +24,8 @@
 	// Map spritesheet
 	["theme1", "theme1.png"],
 	["logo", "Logo.png"],
-	["backgroundMenu", "backgroundMenu.png"]
+	["backgroundMenu", "backgroundMenu.png"],
+	["button", "Button.png"]
 ];
 var imageManager = new NLImages;
 imageManager.imagesPath = CONFIG.rImagesPath;

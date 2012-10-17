@@ -3,7 +3,7 @@ var menu = new Game();
 menu.init = function(){
 	initCanvas(CONFIG.canvasWidth, CONFIG.canvasHeight, CONFIG.canvasName, menu, document.body);
 	this.listButtons = [];
-	this.listButtons.push(new Button(this.CANVAS.width/2,2*this.CANVAS.height/4,"Play",50,this.CTX));
+	this.listButtons.push(new Button(this.CANVAS.width/2,2*this.CANVAS.height/4,"Play",35,this.CTX,imageManager.getImage("button")));
 	this.isInit = true;
 	this.title = new Title(this.CTX,imageManager.getImage("logo"));
 	menu.CANVAS.addEventListener("click",menu.actions,false);
