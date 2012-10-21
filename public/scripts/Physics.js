@@ -48,8 +48,10 @@ game.Physics = function(){
          bodyDef.userData = {"type" : "wall"};
          fixDef.shape = new this.b2PolygonShape;
          fixDef.shape.SetAsBox(metre(w), metre(h));
+
          fixDef.filter.categoryBits   = CONFIG.wallBit;
          fixDef.filter.maskBits = CONFIG.bombBit | CONFIG.tankBit;
+
          this.world.CreateBody(bodyDef).CreateFixture(fixDef);
       }
 
@@ -67,8 +69,10 @@ game.Physics = function(){
          bodyDef.userData = player;
          fixDef.shape = new this.b2PolygonShape;
          fixDef.shape.SetAsBox(metre(w), metre(h));
+
          fixDef.filter.categoryBits   = CONFIG.tankBit;
          fixDef.filter.maskBits       = CONFIG.wallBit | CONFIG.bombBit; 
+
          this.players[player.id] = this.world.CreateBody(bodyDef).CreateFixture(fixDef).GetBody();
          this.players[player.id].bombs = {};
       }
@@ -89,8 +93,10 @@ game.Physics = function(){
             bomb.onCollision(other);       
          }
          fixDef.shape = new this.b2CircleShape(metre(rayon));
-         fixDef.filter.categoryBits   = 0; 
+
+         fixDef.filter.categoryBits   = 0; //En attendant la fin du ghostMode, ensuite bombBit
          fixDef.filter.maskBits       = CONFIG.tankBit | CONFIG.wallBit;
+
          this.players[bomb.pId].bombs[bomb.bid] = this.world.CreateBody(bodyDef).CreateFixture(fixDef).GetBody();
       }
 

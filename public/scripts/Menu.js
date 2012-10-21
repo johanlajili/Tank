@@ -22,6 +22,7 @@ menu.render = function(){
 menu.actions = function(){
 	var x = INPUTS.mousePosition.x;
 	var y = INPUTS.mousePosition.y;
+	console.log(x, y);
 	for(var i = 0; i < menu.listButtons.length; i++){
 		var button = menu.listButtons[i];
 

@@ -16,8 +16,9 @@ game.Bomb = function(pId, x,y,angle, velocity, bid){
 	this.destroyed = false;
 	this.life = 2;
 	this.start = Date.now();
-	this.ghostMode = 10;
+	this.ghostLife = 200;
 	this.velocity = velocity;
+	this.ghost = true;
 	// rotate around that point, converting our 
 	// angle from degrees to radians
 	
@@ -44,7 +45,7 @@ game.Bomb.prototype.getBombDatas = function(){
 		"ghostMode" : this.ghostMode,
 		"velocity" : this.velocity
 	};
-	console.log(this.angle);
+	//console.log(this.angle);
 	return b;
 }
 game.Bomb.prototype.onCollision = function(other)
@@ -82,14 +83,14 @@ game.Bomb.prototype.render = function(CTX) {
 	
 };
 game.Bomb.prototype.update = function() {
-	if (this.ghostMode > 0)
-		this.ghostMode--;
-	if (this.ghostMode == 0)
+
+	if (this.ghost && CONTEXT.currdate - this.start > this.ghostLife)
 	{
 		var filter = this.getRigidBody().GetFixtureList().GetFilterData();
-		filter.categoryBits   = CONFIG.bulletBit;
-		this.ghostMode--;
+		filter.categoryBits   = CONFIG.bombBit;
 		this.getRigidBody().GetFixtureList().SetFilterData(filter);
+		this.ghost = false;
+		console.log("o hai");
 	}
 
 	this.getRigidBody().SetAngularVelocity(0);
