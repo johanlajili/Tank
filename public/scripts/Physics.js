@@ -22,9 +22,7 @@ game.Physics = function(){
 
          this.contactListener = new Box2D.Dynamics.b2ContactListener;
          this.contactListener.BeginContact = function(contact, manifold) {
-            console.log("H");
             if (contact.m_fixtureA.m_body.m_userData != undefined && contact.m_fixtureA.m_body.m_userData.onCollision != undefined) {
-               console.log("fucking col");
                contact.m_fixtureA.m_body.m_userData.onCollision(contact.m_fixtureB.m_body);
             }
             if (contact.m_fixtureB.m_body.m_userData != undefined && contact.m_fixtureB.m_body.m_userData.onCollision != undefined) {

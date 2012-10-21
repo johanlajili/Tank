@@ -24,6 +24,7 @@ game.Bomb = function(pId, x,y,angle, velocity, bid){
 	//this.collider = collider;
 	this.initPhysics();
 	this.getRigidBody().SetLinearVelocity(velocity)
+	this.getRigidBody().SetAngle(this.angle);
 	this.getRigidBody().ApplyImpulse ({x: this.speed*Math.cos(this.angle), y: this.speed*Math.sin(this.angle)}, {x:0,y:0});
 }
 
@@ -81,17 +82,17 @@ game.Bomb.prototype.render = function(CTX) {
 };
 game.Bomb.prototype.update = function() {
 	if (this.ghostMode > 0)
-	this.ghostMode--;
+		this.ghostMode--;
 	if (this.ghostMode == 0)
 	{
-	var filter = this.getRigidBody().GetFixtureList().GetFilterData();
-	filter.categoryBits   = CONFIG.bulletBit;
-	this.ghostMode--;
-	this.getRigidBody().GetFixtureList().SetFilterData(filter);
+		var filter = this.getRigidBody().GetFixtureList().GetFilterData();
+		filter.categoryBits   = CONFIG.bulletBit;
+		this.ghostMode--;
+		this.getRigidBody().GetFixtureList().SetFilterData(filter);
 	}
 
 	this.getRigidBody().SetAngularVelocity(0);
-	this.angle = this.getRigidBody().GetAngle();
+	//this.angle = this.getRigidBody().GetAngle();
 	this.x = pixels(this.getRigidBody().GetPosition().x); // idem
 	this.y = pixels(this.getRigidBody().GetPosition().y);// idem
 	if (this.destroyed)

@@ -5,10 +5,10 @@ game.init = function(){
 	game.physics = new game.Physics();
 	this.players = {};
 	var name = Math.floor(Math.random() * 99999999);
+	game.map = new game.Map();
 	this.players[name] = new game.Player(name, "Orange", name );
 	game.player = this.players[name];
 	
-	game.map = new game.Map();
 	game.CANVAS = CONTEXT.CANVAS;
 	game.CTX = CONTEXT.CTX;
 	//initCanvas(CONFIG.canvasWidth, CONFIG.canvasHeight, CONFIG.canvasName, game, document.body);

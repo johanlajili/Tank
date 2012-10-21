@@ -6,10 +6,10 @@ var app = express();
 
 var server	= require('http').createServer(app);
 var io = require('Socket.io').listen(server);
-
+io.set('log level', 1);
 server.listen(1337);
 
-app.use(express.logger());
+//app.use(express.logger());
 app.use(express.static(__dirname + '/public'));
 app.set("views", __dirname + "/views");
 
@@ -35,7 +35,7 @@ io.sockets.on('connection', function(socket){
 	socket.emit('message', {hello: 'world'});
 	socket.on('playerPing', function(data){
 		if (Date.now() - lastLog > logTimer){
-			console.log(data);
+			//console.log(data);
 			lastLog = Date.now();
 		}
 		players[data.id] = data;

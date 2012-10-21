@@ -6,7 +6,8 @@ game.Player = function(id, color, name, x, y, srv){
 			for (var i in this.bombs){
 				this.bombs[i].update();
 			}
-		this.sendData();
+		if (!this.srv)
+			this.sendData();
 	}
 
 	this.getAimAngle = function(){
@@ -102,7 +103,8 @@ game.Player = function(id, color, name, x, y, srv){
 			"aimPoint" : this.aimPoint,
 			"x" : this.x,
 			"y" : this.y,
-			"angle" : this.angle
+			"angle" : this.angle,
+			"lastBeat" : Date.now()
 		};
 		return datas;
 	}
@@ -133,7 +135,8 @@ game.Player = function(id, color, name, x, y, srv){
 			this.bombs[i].destroy();
 		}
 		game.physics.world.DestroyBody(this.getRigidBody());
-		delete this;
+		var id = this.id;
+		delete CONTEXT.players[id];
 	}
 	if (id !== undefined)
 		this.id = id;
@@ -172,9 +175,13 @@ game.Player = function(id, color, name, x, y, srv){
 	this.minSpeed = -2;
 	this.type = "player";
 
-	var spawn = CONFIG.spawns[Math.floor(Math.random() * CONFIG.spawns.length)];
-	this.x = spawn.x;
-	this.y = spawn.y;
+	var spawn = {x:0,y:0};
+	while (game.map.level[Math.floor(spawn.x / game.map.imgWidth)][Math.floor(spawn.y / game.map.imgHeight)] != "o"){
+		var spawn = {x : Math.floor(Math.random() * game.map.width * game.map.imgWidth), y : Math.floor(Math.random() * game.map.height * game.map.imgHeight)};
+		this.x = spawn.x;
+		this.y = spawn.y;
+	}
+
 	if (x !== undefined)
 		this.x = x;
 	if (y !== undefined)

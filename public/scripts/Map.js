@@ -5,6 +5,9 @@ game.Map = function(level, theme, name){
 
 	this.imgWidth = 96;
 	this.imgHeight = 96;
+	this.randomCoeff = 15;
+	this.nearRandomCoeff = 4;
+	this.tempMap = 	JSON.parse('[["x","x","x","x","x","x","x","x","x","x","x","x","x","w","x"],["x","o","o","o","o","o","o","o","o","o","o","o","w","o","x"],["x","w","o","o","o","o","o","o","o","w","o","o","w","w","w"],["x","w","o","o","o","o","o","o","o","o","o","o","o","o","x"],["x","w","w","w","w","w","o","o","o","o","o","o","o","o","w"],["x","o","o","o","o","o","o","o","o","w","o","o","o","o","x"],["x","o","o","o","o","o","o","o","o","o","o","o","o","o","x"],["x","o","o","o","o","o","o","o","o","o","o","o","o","o","x"],["x","o","o","w","o","o","o","o","o","w","o","o","o","o","x"],["x","w","o","o","o","w","o","w","w","o","o","o","o","o","x"],["x","o","o","o","o","o","o","o","o","w","w","w","o","o","w"],["w","o","o","o","o","o","o","o","o","o","o","o","o","o","x"],["w","o","o","o","o","o","o","o","o","o","o","o","o","o","x"],["x","o","o","o","o","o","o","o","o","o","w","o","o","o","w"],["x","x","x","x","x","x","x","x","x","x","x","w","x","w","w"]]');
 
 	if (level !== undefined)
 		this.level = level;
@@ -16,8 +19,16 @@ game.Map = function(level, theme, name){
 			this.level[i] = [];
 			for (var j = 0; j < this.height; j++){
 
+				// Temp code using pregenerated map :
+				this.level[i][j] = this.tempMap[i][j];
+				if (this.level[i][j] == "x" || this.level[i][j] == "w")
+					game.physics.createFixeBlock(i*this.imgWidth+this.imgWidth/2, j*this.imgHeight+this.imgHeight/2, this.imgWidth/2, this.imgHeight/2);
+				/*
 				this.level[i][j] = "o";
-				if (Math.floor(Math.random() *  20) == 2){
+				var coeff = this.randomCoeff;
+				if ((i > 0 && j > 0 )&& (this.level[i-1][j] == "w"|| this.level[i][j-1] == "w"))
+					coeff = this.nearRandomCoeff
+				if (Math.floor(Math.random() *  coeff) == 2){
 					this.level[i][j] = "w";
 					game.physics.createFixeBlock(i*this.imgWidth+this.imgWidth/2, j*this.imgHeight+this.imgHeight/2, this.imgWidth/2, this.imgHeight/2)
 				}
@@ -26,6 +37,7 @@ game.Map = function(level, theme, name){
 					this.level[i][j] = "x";
 					game.physics.createFixeBlock(i*this.imgWidth+this.imgWidth/2, j*this.imgHeight+this.imgHeight/2, this.imgWidth/2, this.imgHeight/2)
 				}
+				*/
 			}
 		}
 	}

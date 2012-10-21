@@ -69,6 +69,12 @@ game.updatePlayer = function(playerDatas){
 			CONTEXT.players[playerDatas.id][i] = playerDatas[i];
 		}
 	}
+	if (CONTEXT.currdate - playerDatas["lastBeat"] > 200){
+		console.log('allo');
+		CONTEXT.players[playerDatas.id].speed = 0;
+	}else{
+		console.log(playerDatas["lastBeat"]);
+	}
 	CONTEXT.players[playerDatas.id].getRigidBody().SetPositionAndAngle({x : metre(playerDatas.x), y : metre(playerDatas.y)}, playerDatas.angle);
 
 }
@@ -78,7 +84,7 @@ game.updateBomb = function(bombData){
 	//console.log("Updating bomb : " + bombData.bid + " from " + bombData.pId);
 	var pBall = CONTEXT.players[bombData.pId].bombs[bombData.bid];
 	for (var i in bombData){
-		pBall[i] = bombData[i];
+	//	pBall[i] = bombData[i];
 	}
 
 }
