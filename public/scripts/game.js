@@ -23,6 +23,7 @@ game.render = function(){
 		this.players[i].render(this.CTX);
 	}
 	this.minimap.render()
+	CONTEXT.scoreMessages.show();
 }
 game.animate = function(){
 	

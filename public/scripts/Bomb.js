@@ -52,13 +52,10 @@ game.Bomb.prototype.onCollision = function(other)
 {
 
 	this.life--;
-	console.log('?');
 	if (this.life ==0){
 		this.destroyed = true;
 	}
 	if (other.m_userData.type == "player"){
-		console.log(this.pId);
-		console.log(other.m_userData);
 		CONTEXT.players[other.m_userData.id].getHit(this.pId);
 	}
 }

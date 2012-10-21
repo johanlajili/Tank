@@ -26,9 +26,14 @@ game.socket.on('serverPing', function (data) {
 });	
 game.socket.on('destroyPlayer', function(id) {
 	console.log("Destroying : " + id);
+	game.scoreMessages.add(CONTEXT.players[id].name + " est parti.");
 	CONTEXT.players[id].destroy();
-});
 
+});
+game.socket.on('newMsg', function(msg){
+
+	game.scoreMessages.add(msg);
+});
 }
 game.addNewPlayer = function(playerDatas){
 	CONTEXT.players[playerDatas.id] = new game.Player(
@@ -40,6 +45,7 @@ game.addNewPlayer = function(playerDatas){
 		true
 	);
 	console.log("New player added : " + playerDatas.id);
+	game.scoreMessages.add(playerDatas.name + " vient de se connecter.");
 
 }
 game.addNewBomb = function(bombData){

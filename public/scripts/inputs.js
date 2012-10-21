@@ -35,6 +35,17 @@ window.onkeydown = function(event){
 		var p = KEYS[key];
 		INPUTS[p][1] = 1;
 	}
+
+	  var charCode = event.which || event.keyCode;
+	  var charStr = String.fromCharCode(charCode);	
+	 if (key != 37 && key != 38 && key != 39 && key != 40)
+	 	game.scoreMessages.tap(charStr);
+	 if (key == 13){
+	 	game.scoreMessages.send();
+	 }
+	 if (key == 8){
+	 	game.scoreMessages.bckspc();
+	 }
 	if (key == 8 || key == 9 || key == 13 || key == 32){
 		event.preventDefault();
 		event.stopPropagation();

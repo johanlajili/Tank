@@ -41,6 +41,11 @@ io.sockets.on('connection', function(socket){
 		players[data.id] = data;
 		players[data.id].lastPing = CURRDATE;
 	});
+
+	socket.on('chatMsg', function(data){
+
+		io.sockets.emit('newMsg', data);
+	});
 });
 
 var sendDatas = function(){
