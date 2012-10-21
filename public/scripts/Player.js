@@ -6,8 +6,7 @@ game.Player = function(id, color, name, x, y, srv){
 			for (var i in this.bombs){
 				this.bombs[i].update();
 			}
-		if (!this.srv)
-			this.sendData();
+			//this.sendData();
 	}
 
 	this.getAimAngle = function(){
@@ -104,7 +103,8 @@ game.Player = function(id, color, name, x, y, srv){
 			"x" : this.x,
 			"y" : this.y,
 			"angle" : this.angle,
-			"lastBeat" : Date.now()
+			"lastBeat" : Date.now(),
+			"cmd" : "updatePlayer"
 		};
 		return datas;
 	}

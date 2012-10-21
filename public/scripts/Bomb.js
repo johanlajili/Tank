@@ -35,7 +35,7 @@ game.Bomb.prototype.getBombDatas = function(){
 		"y" : this.y,
 		"pId" : this.pId,
 		"bid" : this.bid,
-		"angle" : this.angle,
+		"angle" : this.getRigidBody().GetAngle(),
 		"type" : this.type,
 		"speed" : this.speed,
 		"life" : this.life,
@@ -44,6 +44,7 @@ game.Bomb.prototype.getBombDatas = function(){
 		"ghostMode" : this.ghostMode,
 		"velocity" : this.velocity
 	};
+	console.log(this.angle);
 	return b;
 }
 game.Bomb.prototype.onCollision = function(other)
@@ -92,7 +93,7 @@ game.Bomb.prototype.update = function() {
 	}
 
 	this.getRigidBody().SetAngularVelocity(0);
-	//this.angle = this.getRigidBody().GetAngle();
+	this.angle = this.getRigidBody().GetAngle();
 	this.x = pixels(this.getRigidBody().GetPosition().x); // idem
 	this.y = pixels(this.getRigidBody().GetPosition().y);// idem
 	if (this.destroyed)

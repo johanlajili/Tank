@@ -16,3 +16,10 @@ function run(){
 	requestAnimationFrame(run);
 
 }
+function socketLoop(){
+	if (CONTEXT == game){
+		CONTEXT.player.sendData();
+	}
+
+	setTimeout(socketLoop, 60);
+}

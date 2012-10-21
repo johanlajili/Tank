@@ -30,6 +30,7 @@ window.onload = function(event){
 	menu.init();
 	CONTEXT = loader;
 	resizeScreen();
-	
+
+	socketLoop();
 	run();
 }

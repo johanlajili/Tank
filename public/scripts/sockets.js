@@ -70,10 +70,7 @@ game.updatePlayer = function(playerDatas){
 		}
 	}
 	if (CONTEXT.currdate - playerDatas["lastBeat"] > 200){
-		console.log('allo');
 		CONTEXT.players[playerDatas.id].speed = 0;
-	}else{
-		console.log(playerDatas["lastBeat"]);
 	}
 	CONTEXT.players[playerDatas.id].getRigidBody().SetPositionAndAngle({x : metre(playerDatas.x), y : metre(playerDatas.y)}, playerDatas.angle);
 
