@@ -1,4 +1,4 @@
-var Button = function(x,y,text,fontHeight,CTX,image){
+var Button = function(x,y,text,fontHeight,CTX,image,offsetY){
 	this.x = x;
 	this.y = y;
 	this.text = text;
@@ -9,9 +9,10 @@ var Button = function(x,y,text,fontHeight,CTX,image){
 	//this.height = 50;
 	this.fontHeight = fontHeight;
 	this.CTX = CTX;
+	this.offsetY = offsetY;
 }
 Button.prototype.render = function() {
-	this.CTX.drawImage(this.image,this.x-this.width/2,this.y-this.height+14);
+	this.CTX.drawImage(this.image,this.x-this.width/2,this.y-this.height+this.offsetY);
 	this.CTX.textBaseline = "bottom";
 	this.CTX.textAlign = "center";
 	this.CTX.font = this.fontHeight+"px Arial";

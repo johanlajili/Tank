@@ -25,7 +25,8 @@
 	["theme1", "theme1.png"],
 	["logo", "Logo.png"],
 	["backgroundMenu", "backgroundMenu.png"],
-	["button", "Button.png"]
+	["button", "Button.png"],
+	["Bombv2", "Bombv2.png"]
 ];
 var imageManager = new NLImages;
 imageManager.imagesPath = CONFIG.rImagesPath;

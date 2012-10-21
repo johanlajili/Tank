@@ -9,7 +9,7 @@ game.Bomb = function(pId, x,y,angle, velocity, bid){
 	this.speed = 0.01;
 	this.nb = 0;
 
-	this.img = "Bomb";
+	this.img = "Bombv2";
 	//this.image = imageManager.getImage(this.img);
 	this.width = imageManager.getImageSize(this.img).x;
 	this.height = imageManager.getImageSize(this.img).y;

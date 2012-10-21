@@ -91,7 +91,7 @@ game.Physics = function(){
             bomb.onCollision(other);       
          }
          fixDef.shape = new this.b2CircleShape(metre(rayon));
-         fixDef.filter.categoryBits   = CONFIG.bombBit; 
+         fixDef.filter.categoryBits   = 0; 
          fixDef.filter.maskBits       = CONFIG.tankBit | CONFIG.wallBit;
          this.players[bomb.pId].bombs[bomb.bid] = this.world.CreateBody(bodyDef).CreateFixture(fixDef).GetBody();
       }
