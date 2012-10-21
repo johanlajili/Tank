@@ -2,6 +2,9 @@ game.Player = function(id, color, name, x, y, srv){
 
 	
 	this.update = function(){
+		this.getRigidBody().SetAngle (this.angle);
+		this.getRigidBody().SetAngularVelocity(); // pour éviter que la rotation du tank parte en danseuse étoile
+
 		this.move();
 			for (var i in this.bombs){
 				this.bombs[i].update();
@@ -227,9 +230,6 @@ game.Player = function(id, color, name, x, y, srv){
 				this.angle += this.angleTick;
 			}
 			this.angle %= Math.PI * 2;
-			this.getRigidBody().SetAngle (this.angle);
-			this.getRigidBody().SetAngularVelocity(); // pour éviter que la rotation du tank parte en danseuse étoile
-
 			if (INPUTS.getKey("space")){
 				this.shoot();
 			}
