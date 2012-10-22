@@ -5,6 +5,7 @@ var keys_list = [
 	["right", 39],
 	["down", 40],
 	["space", 32],
+	["ctrl", 17],
 	["z", 90],
 	["q", 81],
 	["s", 83],
@@ -70,6 +71,13 @@ function clickToShoot(event)
 function mouseMove(event){
 	INPUTS.mousePosition = getMouseCoords(event);
 
+}
+window.onmousedown = function(event){
+	console.log("oh hai");
+	INPUTS.mouseDown = true;
+}
+window.onmouseup = function(event){
+	INPUTS.mouseDown = false;
 }
 
 INPUTS.getKey = function(key){

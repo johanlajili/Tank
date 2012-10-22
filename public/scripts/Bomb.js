@@ -87,7 +87,6 @@ game.Bomb.prototype.update = function() {
 		filter.categoryBits   = CONFIG.bombBit;
 		this.getRigidBody().GetFixtureList().SetFilterData(filter);
 		this.ghost = false;
-		console.log("o hai");
 	}
 
 	this.getRigidBody().SetAngularVelocity(0);

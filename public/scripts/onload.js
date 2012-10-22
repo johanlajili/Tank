@@ -4,10 +4,11 @@ game.init = function(){
 	//this.bomb = new game.Bomb(0,0,800,600,4);
 	game.physics = new game.Physics();
 	this.players = {};
-	var name = Math.floor(Math.random() * 99999999);
+	var pId= Math.floor(Math.random() * 99999999);
+	var pseudo = CONFIG.randomPseudos[Math.floor(Math.random() * CONFIG.randomPseudos.length)];
 	game.map = new game.Map();
-	this.players[name] = new game.Player(name, "Orange", name );
-	game.player = this.players[name];
+	this.players[pId] = new game.Player(pId, "Orange", pseudo );
+	game.player = this.players[pId];
 	
 	game.CANVAS = CONTEXT.CANVAS;
 	game.CTX = CONTEXT.CTX;

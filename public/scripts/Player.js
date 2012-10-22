@@ -62,9 +62,11 @@ game.Player = function(id, color, name, x, y, srv){
 		return true;
 	}
 	this.getHit = function(pId){
-		var message = this.name + " a été touché par " + CONTEXT.players[pId].name;
+		var randomTaunt = CONFIG.randomTaunt[Math.floor(Math.random() * CONFIG.randomTaunt.length)];
+
+		var message = this.name + " a été touché par " + CONTEXT.players[pId].name + randomTaunt;
 		if (pId == this.id)
-			message = this.name + " s'est suicidé";
+			message = this.name + " s'est suicidé" + randomTaunt;
 		game.scoreMessages.add(message);
 	}
 	this.move = function(){
@@ -75,7 +77,6 @@ game.Player = function(id, color, name, x, y, srv){
 			this.y = pixels(this.getRigidBody().GetPosition().y);// idem
 	}
 	this.destroyBomb = function(bid){
-		console.log('ah');
 		delete this.bombs[bid];
 	}
 	this.initPhysics = function(){
@@ -230,7 +231,7 @@ game.Player = function(id, color, name, x, y, srv){
 				this.angle += this.angleTick;
 			}
 			this.angle %= Math.PI * 2;
-			if (INPUTS.getKey("space")){
+			if (INPUTS.getKey("ctrl") || INPUTS.mouseDown){
 				this.shoot();
 			}
 		}

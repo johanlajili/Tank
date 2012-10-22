@@ -20,3 +20,57 @@ for (var i = 1; i < 15; i++){
 		CONFIG.spawns.push({x : i * 100, y : j * 100});
 	}
 }
+
+CONFIG.randomPseudos = [
+	
+	"Awesoman",
+	"LookAtMyPseudo",
+	"D4rk1ll3r",
+	"SisiLaFamille",
+	"QuiVeutÊtreMonAmi?",
+	"ThatGameIsAwesome",
+	"Pseudo",
+	"Anonymousse",
+	"RandomPseudo",
+	"JaiPasDidee",
+	"Kevin",
+	"Robert",
+	"Pedobear",
+	"Noob",
+	"IamGay",
+	"Vanessa",
+	"Dieu",
+	"WaitForIt...",
+	"LegenDaddy",
+	"<Maitre du jeu>",
+	"God",
+	"Spiderman",
+	"Superman",
+	"Link",
+	"Mario",
+	"Bowser",
+	"Peach",
+	"Zelda",
+	"Yoshi",
+	"<(^_^<) (>^_^)>"
+];
+
+CONFIG.randomTaunt = [
+	", quel mauvais.",
+	", il avait qu'à pas naitre",
+	", de toute façon personne l'aimait",
+	", et c'est tant mieux",
+	", OWNED.",
+	", noob.",
+	", et personne ne le pleurera",
+	", il s'envole vers d'autres cieux",
+	", achetez sa biographie",
+	", de toute façon il était moche",
+	", mais bon, on s'en fout",
+	". Deux fois.",
+	". Ou pas.",
+	". Pour de vrai.",
+	", il parait...",
+	", revendez ses organes §"
+
+];

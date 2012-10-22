@@ -3,7 +3,7 @@ game.scoreMessages.list = [];
 game.scoreMessages.currentStr = "";
 game.scoreMessages.show = function(){
 
-	game.scoreMessages.pos = {x:CONTEXT.CANVAS.width - 350,y:CONTEXT.CANVAS.height - 240, w:330, h:180};
+	game.scoreMessages.pos = {x:CONTEXT.CANVAS.width - 450,y:CONTEXT.CANVAS.height - 240, w:430, h:180};
 	CONTEXT.CTX.fillStyle = "rgba(50, 50, 50, 0.5)";
 	CONTEXT.CTX.fillRect(this.pos.x, this.pos.y, this.pos.w, this.pos.h);
 	CONTEXT.CTX.fillStyle = "rgb(250, 250, 250)";
