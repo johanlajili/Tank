@@ -13,7 +13,13 @@ CONFIG.debug = true;
 CONFIG.wallBit = 0x0001;
 CONFIG.tankBit = 0x0002;
 CONFIG.bombBit = 0x0004;
-CONFIG.ip = "83.157.41.20";
+CONFIG.local = false;
+CONFIG.localhost = "localhost";
+CONFIG.distantip = "83.157.41.20";
+if (CONFIG.local)
+	CONFIG.ip = CONFIG.localhost;
+else
+	CONFIG.ip = CONFIG.distantip;
 CONFIG.port = "1337";
 
 CONFIG.spawns = [];
