@@ -29,6 +29,15 @@ for (var i = 1; i < 15; i++){
 	}
 }
 
+CONFIG.colorsList = [
+
+	"Blue",
+	"Green",
+	"Orange",
+	"Purple",
+	"Red"
+];
+
 CONFIG.randomPseudos = [
 	
 	"Awesoman",

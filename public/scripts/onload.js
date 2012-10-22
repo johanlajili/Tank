@@ -6,8 +6,10 @@ game.init = function(){
 	this.players = {};
 	var pId= Math.floor(Math.random() * 99999999);
 	var pseudo = CONFIG.randomPseudos[Math.floor(Math.random() * CONFIG.randomPseudos.length)];
+	var color = CONFIG.colorsList[Math.floor(Math.random() * CONFIG.colorsList.length)];
 	game.map = new game.Map();
-	this.players[pId] = new game.Player(pId, "Orange", pseudo );
+
+	this.players[pId] = new game.Player(pId, color, pseudo );
 	game.player = this.players[pId];
 	
 	game.CANVAS = CONTEXT.CANVAS;

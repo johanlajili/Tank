@@ -55,6 +55,10 @@ io.sockets.on('connection', function(socket){
 		console.log(data);
 		io.sockets.emit('newMsg', data);
 	});
+
+	socket.on('touched', function(data){
+		console.log(data);
+	})
 });
 
 var sendDatas = function(){
