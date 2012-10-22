@@ -1,0 +1,44 @@
+!!! 5
+html
+	head
+		title Mon super jeu
+		link(type="text/css", rel="stylesheet", href="/css/main.css")
+	body
+
+		h2 Lancer le jeu
+		ul
+			li Lancer node dans le dossier du jeu
+			li Ouvrir la page localhost:1337
+			li ???
+			li Profit
+
+		h2 A propos du code
+		h3 Libs
+		ul
+			li Box2DWeb pour le moteur physique
+			li Stats (de MrDoob) pour le compteur de FPS
+
+		h3 Architecture :
+		p Une variable globale CONTEXT contient une liste de fonctions éxécutées par la boucle principale :
+		ul
+			li inputs : Gère tous les inputs du jeu (permet de ne l'éxécuter que pour le joueur client)
+			li update : Basé sur les inputs, met à jour le jeu, le moteur physique, etc. (Pourrait être passé côté serveur plus tard...)
+			li animate : Gère les animations (pas utilisé ici)
+			li render : Dessine les éléments du jeu
+
+		p Cette variable context permet de changer à la volée de contexte de jeu : menu, game, loader... En changeant la variable de contexte on se retrouve dans un écran de jeu différent qui a ses propres fonctions
+
+		h2 Fichiers
+		ul
+			li NLImages : Moteur d'images (le code est assez explicite)
+			li NLSounds : Moteur de son (pas encore utilisé)
+			li Physics : L'implémentation de Box2D
+			li Camera : Une classe qui gère la position de la caméra et qui follow un objet (le joueur) pour gérer le scrolling facilement
+			li inputs : Toutes les fonctions touchant aux inputs. La plupart ne sont pas encore très propres
+			li Map : La classe qui gère la map et sa création, son affichage
+			li Minimap : La classe qui gère la minimap et son affichage
+			li Player : Classe du joueur
+			li ScoreMessages : La classe qui gère tous les messages affichés dans la chatbox
+			li config : Une grosse variable globale avec des paramètres pour le jeu
+			li sockets : Toutes les fonctions de communication avec le serveur
+
