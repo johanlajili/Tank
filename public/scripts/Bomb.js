@@ -6,7 +6,7 @@ game.Bomb = function(pId, x,y,angle, velocity, bid){
 	this.angle = angle
 	this.type = "bomb";
 	this.bid = bid;
-	this.speed = 0.01;
+	this.speed = 0.0007;
 	this.nb = 0;
 
 	this.img = "Bombv2";
@@ -26,7 +26,7 @@ game.Bomb = function(pId, x,y,angle, velocity, bid){
 	this.initPhysics();
 	this.getRigidBody().SetLinearVelocity(velocity)
 	this.getRigidBody().SetAngle(this.angle);
-	this.getRigidBody().ApplyImpulse ({x: this.speed*Math.cos(this.angle), y: this.speed*Math.sin(this.angle)}, {x:0,y:0});
+	this.getRigidBody().ApplyImpulse ({x: this.speed* CONTEXT.deltaTime * Math.cos(this.angle), y: this.speed* CONTEXT.deltaTime * Math.sin(this.angle)}, {x:0,y:0});
 }
 
 game.Bomb.prototype.getBombDatas = function(){

@@ -93,7 +93,7 @@ game.Player = function(id, color, name, x, y, srv){
 	}
 	this.move = function(){
 
-			this.getRigidBody().SetLinearVelocity({x: Math.cos(this.angle) * this.speed, y:Math.sin(this.angle) * this.speed})
+			this.getRigidBody().SetLinearVelocity({x: Math.cos(this.angle) * this.speed * CONTEXT.deltaTime, y:Math.sin(this.angle) * this.speed * CONTEXT.deltaTime})
 			this.angle = this.getRigidBody().GetAngle(); // on met à jour avec les infos du moteur physique
 			this.x = pixels(this.getRigidBody().GetPosition().x); // idem
 			this.y = pixels(this.getRigidBody().GetPosition().y);// idem
@@ -215,11 +215,11 @@ game.Player = function(id, color, name, x, y, srv){
 	this.angle = 0;
 	this.aimAngle = 0; // angle de tir, en radian
 	this.aimPoint = {x: 0, y:0}
-	this.speed = 1;
-	this.accel = 1;
+	this.speed = 0.1;
+	this.accel = 0.01;
 	this.angleTick = 0.05;
-	this.maxSpeed = 2;
-	this.minSpeed = -2;
+	this.maxSpeed = 0.1;
+	this.minSpeed = -0.1;
 	this.type = "player";
 
 	this.ghost = true;
