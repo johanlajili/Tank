@@ -52,7 +52,8 @@ game.addNewBomb = function(bombData){
 
 	console.log("Adding bomb to " + bombData.pId + " : " + bombData.bid);
 	var p = CONTEXT.players[bombData.pId];
-
+	CONTEXT.players[bombData.pId].shoot();
+/*
 	console.log(bombData.pId + " - " + bombData.x
 	+ " - " + bombData.y + " - " + bombData.angle + " - " 
 	+ bombData.velocity + " - " + bombData.bid);
@@ -66,6 +67,7 @@ game.addNewBomb = function(bombData){
 		bombData.bid
 	);
 	console.log("New bomb added to " + bombData.pId + " : " + bombData.bid);
+*/
 }
 
 game.updatePlayer = function(playerDatas){

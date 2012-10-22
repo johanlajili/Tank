@@ -20,11 +20,29 @@ game.Player = function(id, color, name, x, y, srv){
 
 	}
 	this.render = function(CTX){
-		this.drawPlayer();
+		var drawPlayer = true;
+		if (this.ghost && !this.cligno)
+			drawPlayer = false;
+
+		if (this.ghost){
+			if (Date.now() - this.clignoTime > this.clignoTimer){
+				this.cligno = false;
+			}
+			if (Date.now() - this.clignoTime > this.clignoTimer * 2){
+				this.cligno = true;
+				this.clignoTime = Date.now();
+			}
+			if (Date.now() - this.lastGhost > this.ghostTimer){
+				this.ghost = false;
+			}
+		}
+		if (drawPlayer){
+			this.drawPlayer();
+			this.drawCanon(CTX);
+		}
 		for (var i in this.bombs){
 			this.bombs[i].render(CTX);
 		}
-		this.drawCanon(CTX);
 		game.minimap.draw({type:"player", x:this.x, y:this.y, w:this.w/2, h:this.h})
 		this.drawTarget(CTX);
 	}
@@ -62,12 +80,16 @@ game.Player = function(id, color, name, x, y, srv){
 		return true;
 	}
 	this.getHit = function(pId){
-		var randomTaunt = CONFIG.randomTaunt[Math.floor(Math.random() * CONFIG.randomTaunt.length)];
+		
+		if (!this.ghost){
+			var randomTaunt = CONFIG.randomTaunt[Math.floor(Math.random() * CONFIG.randomTaunt.length)];
 
-		var message = this.name + " a été touché par " + CONTEXT.players[pId].name + randomTaunt;
-		if (pId == this.id)
-			message = this.name + " s'est suicidé" + randomTaunt;
-		game.scoreMessages.add(message);
+			var message = this.name + " a été touché par " + CONTEXT.players[pId].name + randomTaunt;
+			if (pId == this.id)
+				message = this.name + " s'est suicidé" + randomTaunt;
+			game.scoreMessages.add(message);
+			this.respawn();
+		}
 	}
 	this.move = function(){
 
@@ -142,6 +164,27 @@ game.Player = function(id, color, name, x, y, srv){
 		var id = this.id;
 		delete CONTEXT.players[id];
 	}
+
+	this.respawn = function(){
+		this.lastGhost = Date.now();
+		this.cligno = true;
+		this.clignoTime = Date.now();
+		this.ghost = true;
+
+		var spawn = this.calculateSpawnPosition();
+		this.x = spawn.x;
+		this.y = spawn.y;
+		this.getRigidBody().SetPositionAndAngle({x : metre(this.x), y : metre(this.y)}, this.angle);
+
+	}
+	this.calculateSpawnPosition = function(){
+
+		var spawn = {x:0,y:0};
+		while (game.map.level[Math.floor(spawn.x / game.map.imgWidth)][Math.floor(spawn.y / game.map.imgHeight)] != "o"){
+			spawn = {x : Math.floor(Math.random() * game.map.width * game.map.imgWidth), y : Math.floor(Math.random() * game.map.height * game.map.imgHeight)};
+		}
+		return spawn;
+	}
 	if (id !== undefined)
 		this.id = id;
 	else
@@ -179,12 +222,16 @@ game.Player = function(id, color, name, x, y, srv){
 	this.minSpeed = -2;
 	this.type = "player";
 
-	var spawn = {x:0,y:0};
-	while (game.map.level[Math.floor(spawn.x / game.map.imgWidth)][Math.floor(spawn.y / game.map.imgHeight)] != "o"){
-		var spawn = {x : Math.floor(Math.random() * game.map.width * game.map.imgWidth), y : Math.floor(Math.random() * game.map.height * game.map.imgHeight)};
-		this.x = spawn.x;
-		this.y = spawn.y;
-	}
+	this.ghost = true;
+	this.ghostTimer = 3000;
+	this.lastGhost = Date.now();
+
+	this.clignoTimer = 300;
+	this.clignoTime = Date.now();
+
+	var spawn = this.calculateSpawnPosition();
+	this.x = spawn.x;
+	this.y = spawn.y;
 
 	if (x !== undefined)
 		this.x = x;
@@ -194,7 +241,7 @@ game.Player = function(id, color, name, x, y, srv){
 	this.h = 72;
 
 	this.bombs = {};
-	this.bombsTimer = 100;
+	this.bombsTimer = 900;
 	this.lastBomb = Date.now();
 
 	this.initPhysics();

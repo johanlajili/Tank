@@ -22,7 +22,7 @@ game.init = function(){
 	game.camera = new game.Camera(CONTEXT.CANVAS.width, CONTEXT.CANVAS.height, game.player, game.CTX);
 	game.CANVAS.addEventListener("click", clickToShoot, false);
 	game.camera = new game.Camera(CONTEXT.CANVAS.width, CONTEXT.CANVAS.height, game.player, game.CTX)
-	game.socket = io.connect('http://localhost:1337');
+	game.socket = io.connect('http://' + CONFIG.ip + ':' + CONFIG.port);
 	game.initSockets();
 	game.ready = true;
 }

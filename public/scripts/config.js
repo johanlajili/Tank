@@ -13,6 +13,8 @@ CONFIG.debug = true;
 CONFIG.wallBit = 0x0001;
 CONFIG.tankBit = 0x0002;
 CONFIG.bombBit = 0x0004;
+CONFIG.ip = "83.157.41.20";
+CONFIG.port = "1337";
 
 CONFIG.spawns = [];
 for (var i = 1; i < 15; i++){
