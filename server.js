@@ -40,6 +40,7 @@ var logTimer = 1000;
 var playerTimeout = 5000;
 var CURRDATE = Date.now();
 io.sockets.on('connection', function(socket){
+	console.log("New player");
 	socket.emit('message', {hello: 'world'});
 	socket.on('playerPing', function(data){
 		if (Date.now() - lastLog > logTimer){
@@ -51,7 +52,7 @@ io.sockets.on('connection', function(socket){
 	});
 
 	socket.on('chatMsg', function(data){
-
+		console.log(data);
 		io.sockets.emit('newMsg', data);
 	});
 });
@@ -61,7 +62,7 @@ var sendDatas = function(){
 	CURRDATE = Date.now();
 	io.sockets.emit('serverPing', players);
 		if (Date.now() - lastLog > logTimer){
-			console.log("Datas sent to clients");
+			//console.log("Datas sent to clients");
 			lastLog = Date.now();
 		}
 
