@@ -22,7 +22,7 @@ game.Map = function(level, theme, name){
 				// Temp code using pregenerated map :
 				this.level[i][j] = this.tempMap[i][j];
 				if (this.level[i][j] == "x" || this.level[i][j] == "w" || this.level[i][j] == "e")
-					game.physics.createFixeBlock(i*this.imgWidth+this.imgWidth/2, j*this.imgHeight+this.imgHeight/2, this.imgWidth/2, this.imgHeight/2);
+					game.physics.createFixeBlock(i*this.imgWidth+this.imgWidth/2, j*this.imgHeight+this.imgHeight/2, this.imgWidth/2, this.imgHeight/2,i, j);
 				/*
 				this.level[i][j] = "o";
 				var coeff = this.randomCoeff;

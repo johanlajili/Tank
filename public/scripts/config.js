@@ -13,6 +13,7 @@ CONFIG.debug = true;
 CONFIG.wallBit = 0x0001;
 CONFIG.tankBit = 0x0002;
 CONFIG.bombBit = 0x0004;
+CONFIG.bombLife = 3;
 CONFIG.local = true;
 CONFIG.localhost = "localhost";
 CONFIG.distantip = "172.16.60.110";

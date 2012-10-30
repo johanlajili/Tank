@@ -64,19 +64,19 @@ window.onkeyup = function(event){
 	}
 
 }
-function clickToShoot(event)
+function canvasClick(event)
 {
 	game.player.shoot();
+	
 }
 function mouseMove(event){
 	INPUTS.mousePosition = getMouseCoords(event);
 
 }
-window.onmousedown = function(event){
-	console.log("oh hai");
-	INPUTS.mouseDown = true;
-}
+
+
 window.onmouseup = function(event){
+	console.log("?");
 	INPUTS.mouseDown = false;
 }
 

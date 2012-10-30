@@ -14,7 +14,7 @@ game.Bomb = function(pId, x,y,angle, velocity, bid){
 	this.width = imageManager.getImageSize(this.img).x;
 	this.height = imageManager.getImageSize(this.img).y;
 	this.destroyed = false;
-	this.life = 2;
+	this.life = CONFIG.bombLife;
 	this.start = Date.now();
 	this.ghostLife = 200;
 	this.velocity = velocity;
@@ -53,10 +53,19 @@ game.Bomb.prototype.onCollision = function(other)
 
 	this.life--;
 	if (this.life ==0){
+
 		this.destroyed = true;
 	}
 	if (other.m_userData.type == "player"){
 		CONTEXT.players[other.m_userData.id].getHit(this.pId);
+	}
+	if (other.m_userData.type == "wall"){
+		var p = CONTEXT.map.level[other.m_userData.x][other.m_userData.y];
+		if (p == "e"){
+			CONTEXT.map.level[other.m_userData.x][other.m_userData.y] = "o";
+			this.life = 0;
+			this.destroyed = true;
+		}
 	}
 }
 game.Bomb.prototype.render = function(CTX) {
@@ -115,6 +124,7 @@ game.Bomb.prototype.getRigidBody = function(){
 	return CONTEXT.physics.players[this.pId].bombs[this.bid];
 }
 game.Bomb.prototype.destroy = function(){
+	this.destroyed = true;
 	game.physics.world.DestroyBody(this.getRigidBody());
 	var p = CONTEXT.players[this.pId];
 	p.destroyBomb(this.bid);
