@@ -7,7 +7,7 @@ game.Map = function(level, theme, name){
 	this.imgHeight = 96;
 	this.randomCoeff = 15;
 	this.nearRandomCoeff = 4;
-	this.tempMap = 	JSON.parse('[["x","x","x","x","x","x","x","x","x","x","x","x","x","w","x"],["x","o","o","o","o","o","o","o","o","o","o","o","w","o","x"],["x","w","o","o","o","o","o","o","o","w","o","o","w","w","w"],["x","w","o","o","o","o","o","o","o","o","o","o","o","o","x"],["x","w","w","w","w","w","o","o","o","o","o","o","o","o","w"],["x","o","o","o","o","o","o","o","o","w","o","o","o","o","x"],["x","o","o","o","o","o","o","o","o","o","o","o","o","o","x"],["x","o","o","o","o","o","o","o","o","o","o","o","o","o","x"],["x","o","o","w","o","o","o","o","o","w","o","o","o","o","x"],["x","w","o","o","o","w","o","w","w","o","o","o","o","o","x"],["x","o","o","o","o","o","o","o","o","w","w","w","o","o","w"],["w","o","o","o","o","o","o","o","o","o","o","o","o","o","x"],["w","o","o","o","o","o","o","o","o","o","o","o","o","o","x"],["x","o","o","o","o","o","o","o","o","o","w","o","o","o","w"],["x","x","x","x","x","x","x","x","x","x","x","w","x","w","w"]]');
+	this.tempMap = 	JSON.parse('[["x","x","x","x","x","x","x","x","x","x","x","x","x","w","x"],["x","o","o","o","o","o","o","o","o","o","o","o","w","o","x"],["x","w","o","o","o","o","o","o","o","e","o","o","e","w","w"],["x","w","o","o","o","o","o","o","o","o","o","o","o","o","x"],["x","w","w","w","w","e","o","o","o","o","o","o","o","o","w"],["x","o","o","o","o","o","o","o","o","e","o","o","o","o","x"],["x","o","o","o","o","o","o","o","o","o","o","o","o","o","x"],["x","o","o","o","o","o","o","o","o","o","o","o","o","o","x"],["x","o","o","w","o","o","o","o","o","w","o","o","o","o","x"],["x","w","o","o","o","w","o","w","w","o","o","o","o","o","x"],["x","o","o","o","o","o","o","o","o","w","w","w","o","o","w"],["w","o","o","o","o","o","o","o","o","o","o","o","o","o","x"],["w","o","o","o","o","o","o","o","o","o","o","o","o","o","x"],["x","o","o","o","o","o","o","o","o","o","w","o","o","o","w"],["x","x","x","x","x","x","x","x","x","x","x","w","x","w","w"]]');
 
 	if (level !== undefined)
 		this.level = level;
@@ -21,7 +21,7 @@ game.Map = function(level, theme, name){
 
 				// Temp code using pregenerated map :
 				this.level[i][j] = this.tempMap[i][j];
-				if (this.level[i][j] == "x" || this.level[i][j] == "w")
+				if (this.level[i][j] == "x" || this.level[i][j] == "w" || this.level[i][j] == "e")
 					game.physics.createFixeBlock(i*this.imgWidth+this.imgWidth/2, j*this.imgHeight+this.imgHeight/2, this.imgWidth/2, this.imgHeight/2);
 				/*
 				this.level[i][j] = "o";
@@ -53,6 +53,28 @@ game.Map = function(level, theme, name){
 	else
 		this.name = "Anonymousse";
 
+	this.blocks = {
+		"x" : {
+
+			"x" : 96,
+			"y" : 0
+		},
+		"o" : {
+
+			"x" : 0,
+			"y" : 0
+		},
+		"w" : {
+
+			"x" : 96,
+			"y" : 0
+		},
+		"e" : {
+			"x" : 192,
+			"y" : 0
+		}
+	};
+
 	this.update = function(){
 
 	}
@@ -62,12 +84,10 @@ game.Map = function(level, theme, name){
 		for (var i = 0; i < this.width; i++){
 			for (var j = 0; j < this.height; j++){
 
-				var x = 0;
-				var y = 0;
-				if (this.level[i][j] == "x" || this.level[i][j] == "w"){
-					x = this.imgWidth;
-					y = 0;
-				}
+				var l = this.level[i][j];
+				var x = this.blocks[l].x;
+				var y = this.blocks[l].y;
+
 				game.camera.drawImage(this.theme, x, y, this.imgWidth, this.imgHeight, i * this.imgWidth, j * this.imgHeight, this.imgWidth, this.imgHeight);
 				if (x!=0) game.minimap.draw({type:"block", x:i * this.imgWidth, y:j * this.imgHeight, w:this.imgWidth, h:this.imgHeight})
 			}
