@@ -13,9 +13,9 @@ CONFIG.debug = true;
 CONFIG.wallBit = 0x0001;
 CONFIG.tankBit = 0x0002;
 CONFIG.bombBit = 0x0004;
-CONFIG.local = false;
+CONFIG.local = true;
 CONFIG.localhost = "localhost";
-CONFIG.distantip = "83.157.41.20";
+CONFIG.distantip = "172.16.60.110";
 if (CONFIG.local)
 	CONFIG.ip = CONFIG.localhost;
 else
