@@ -71,7 +71,7 @@ game.Physics = function(){
          fixDef.shape.SetAsBox(metre(w), metre(h));
 
          fixDef.filter.categoryBits   = CONFIG.tankBit;
-         fixDef.filter.maskBits       = CONFIG.wallBit | CONFIG.bombBit; 
+         fixDef.filter.maskBits       = CONFIG.wallBit | CONFIG.bombBit | CONFIG.tankBit; 
 
          this.players[player.id] = this.world.CreateBody(bodyDef).CreateFixture(fixDef).GetBody();
          this.players[player.id].bombs = {};

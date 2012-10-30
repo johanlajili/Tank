@@ -13,11 +13,6 @@ server.listen(1337);
 app.use(express.static(__dirname + '/public'));
 app.set("views", __dirname + "/views");
 
-app.get ('/test', function(req, res){
-
-	res.send("Coucou, tu veux être mon ami ?");
-});
-
 app.get('/', function(req, res){
 
 	res.render('home.jade');
@@ -39,9 +34,8 @@ var logTimer = 1000;
 
 var playerTimeout = 5000;
 var CURRDATE = Date.now();
-io.sockets.on('connection', function(socket){
+io.sockets.on('connection', function(socket){ // Connection est envoyé automatiquement quand un client se connecte à socket.io, elle donne le socket de la personne en paramètre.
 	console.log("New player");
-	socket.emit('message', {hello: 'world'});
 	socket.on('playerPing', function(data){
 		if (Date.now() - lastLog > logTimer){
 			//console.log(data);
