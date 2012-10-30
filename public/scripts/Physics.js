@@ -32,7 +32,7 @@ game.Physics = function(){
          this.world.SetContactListener(this.contactListener);
       }
 
-      this.createFixeBlock = function(x,y,w,h)
+      this.createFixeBlock = function(x,y,w,h,i,j)
       {
          var fixDef = new this.b2FixtureDef;
          fixDef.density = 0;
@@ -45,7 +45,11 @@ game.Physics = function(){
          bodyDef.type = this.b2Body.b2_staticBody;
          bodyDef.position.x = metre(x);
          bodyDef.position.y = metre(y);
-         bodyDef.userData = {"type" : "wall"};
+         bodyDef.userData = {
+            "type" : "wall",
+            "x" : i,
+            "y" : j
+         };
          fixDef.shape = new this.b2PolygonShape;
          fixDef.shape.SetAsBox(metre(w), metre(h));
 
