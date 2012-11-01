@@ -1,6 +1,7 @@
 game.Physics = function(){
 
-     
+     this.callStack = [];
+
      this.init = function() {
          this.blocks = [];
          this.players = {};
@@ -104,8 +105,27 @@ game.Physics = function(){
          this.players[bomb.pId].bombs[bomb.bid] = this.world.CreateBody(bodyDef).CreateFixture(fixDef).GetBody();
       }
 
+      this.addToStack = function(cible, call)
+     {
+      this.callStack.push(
+         {
+            object: cible,
+            callback: call
+         }
+         )
+     }
+
+     this.checkStack = function()
+     {
+      while (this.callStack.length > 0)
+      {
+         this.callStack[0].object[this.callStack[0].callback]();
+         this.callStack.splice(0,1);
+      }
+     }  
       this.update = function()
       { 
+         this.checkStack();
          this.world.Step(
                1 / 60   //frame-rate
             ,  10       //velocity iterations
@@ -113,6 +133,7 @@ game.Physics = function(){
          );
          this.world.ClearForces();
       }
+
 
 
       this.init();

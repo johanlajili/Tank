@@ -89,7 +89,7 @@ game.Player = function(id, color, name, x, y, srv){
 			if (pId == this.id)
 				message = this.name + " s'est suicidé" + randomTaunt;
 			game.scoreMessages.add(message);
-			this.respawn();
+			game.physics.addToStack(this, "respawn");
 		}
 	}
 	this.move = function(){
@@ -176,8 +176,10 @@ game.Player = function(id, color, name, x, y, srv){
 		this.x = spawn.x;
 		this.y = spawn.y;
 		this.getRigidBody().SetPositionAndAngle({x : metre(this.x), y : metre(this.y)}, this.angle);
-
 	}
+
+
+
 	this.calculateSpawnPosition = function(){
 
 		var spawn = {x:0,y:0};
