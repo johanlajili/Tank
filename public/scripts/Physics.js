@@ -30,6 +30,16 @@ game.Physics = function(){
                contact.m_fixtureB.m_body.m_userData.onCollision(contact.m_fixtureA.m_body);
             }
          };
+         this.contactListener.PreSolve = function(contact, manifold) {
+            if (contact.m_fixtureA.m_body.m_userData != undefined && contact.m_fixtureA.m_body.m_userData.onPreSolve != undefined) {
+               contact.m_fixtureA.m_body.m_userData.onPreSolve(contact.m_fixtureB.m_body, contact);
+            }
+            if (contact.m_fixtureB.m_body.m_userData != undefined && contact.m_fixtureB.m_body.m_userData.onPreSolve != undefined) {
+               contact.m_fixtureB.m_body.m_userData.onPreSolve(contact.m_fixtureA.m_body, contact);
+            }
+         };
+
+
          this.world.SetContactListener(this.contactListener);
       }
 
@@ -97,9 +107,13 @@ game.Physics = function(){
             var bomb = CONTEXT.players[this.pId].bombs[this.bid];
             bomb.onCollision(other);       
          }
+         bodyDef.userData.onPreSolve = function(other, contact){
+            var bomb = CONTEXT.players[this.pId].bombs[this.bid];
+            bomb.onPreSolve(other, contact)
+         }
          fixDef.shape = new this.b2CircleShape(metre(rayon));
 
-         fixDef.filter.categoryBits   = 0; //En attendant la fin du ghostMode, ensuite bombBit
+         fixDef.filter.categoryBits   = CONFIG.bombBit;
          fixDef.filter.maskBits       = CONFIG.tankBit | CONFIG.wallBit;
 
          this.players[bomb.pId].bombs[bomb.bid] = this.world.CreateBody(bodyDef).CreateFixture(fixDef).GetBody();

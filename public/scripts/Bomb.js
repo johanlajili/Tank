@@ -16,7 +16,6 @@ game.Bomb = function(pId, x,y,angle, velocity, bid){
 	this.destroyed = false;
 	this.life = CONFIG.bombLife;
 	this.start = Date.now();
-	this.ghostLife = 200;
 	this.velocity = velocity;
 	this.ghost = true;
 	// rotate around that point, converting our 
@@ -50,21 +49,33 @@ game.Bomb.prototype.getBombDatas = function(){
 }
 game.Bomb.prototype.onCollision = function(other)
 {
-
+	console.log("collision")
 	this.life--;
 	if (this.life ==0){
 
 		this.destroyed = true;
 	}
-	if (other.m_userData.type == "player"){
+	if (other.m_userData.type == "player" && (other.m_userData.id != this.pId || this.ghost == false)){
 		CONTEXT.players[other.m_userData.id].getHit(this.pId);
 	}
-	if (other.m_userData.type == "wall"){
+	if (other.m_userData.type == "wall" && other.m_userData.id != this.pId){
+		this.ghost = false;
 		var p = CONTEXT.map.level[other.m_userData.x][other.m_userData.y];
 		if (p == "e"){
 			CONTEXT.map.level[other.m_userData.x][other.m_userData.y] = "o";
 			this.life = 0;
 			this.destroyed = true;
+		}
+	}
+
+}
+game.Bomb.prototype.onPreSolve = function(other, contact)
+{
+	if (other.m_userData.type == "player")
+	{
+		if (other.m_userData.id == this.pId && this.ghost == true)
+		{
+			contact.SetEnabled(false);
 		}
 	}
 }
@@ -89,14 +100,6 @@ game.Bomb.prototype.render = function(CTX) {
 	
 };
 game.Bomb.prototype.update = function() {
-
-	if (this.ghost && CONTEXT.currdate - this.start > this.ghostLife)
-	{
-		var filter = this.getRigidBody().GetFixtureList().GetFilterData();
-		filter.categoryBits   = CONFIG.bombBit;
-		this.getRigidBody().GetFixtureList().SetFilterData(filter);
-		this.ghost = false;
-	}
 
 	this.getRigidBody().SetAngularVelocity(0);
 	this.angle = this.getRigidBody().GetAngle();
