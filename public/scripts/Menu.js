@@ -2,11 +2,12 @@ var menu = new Game();
 
 menu.init = function(){
 	initCanvas(CONFIG.canvasWidth, CONFIG.canvasHeight, CONFIG.canvasName, menu, document.body);
+	menu.CANVAS.addEventListener("click", canvasClick, false);
+
 	this.listButtons = [];
 	this.listButtons.push(new Button(this.CANVAS.width/2,2*this.CANVAS.height/4,"Play",35,this.CTX,imageManager.getImage("button"),14));
 	this.isInit = true;
 	this.title = new Title(this.CTX,imageManager.getImage("logo"));
-	menu.CANVAS.addEventListener("click",menu.actions,false);
 	loader.CANVAS = menu.CANVAS;
 	loader.CTX = menu.CTX;
 }
@@ -18,6 +19,11 @@ menu.render = function(){
 
 	}
 	this.title.render();
+}
+
+menu.onClick = function()
+{
+	menu.actions();
 }
 menu.actions = function(){
 	var x = INPUTS.mousePosition.x;

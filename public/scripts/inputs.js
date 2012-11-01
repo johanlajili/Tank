@@ -13,9 +13,11 @@ var keys_list = [
 	["a", 65]
 ];
 
+
 var INPUTS = {
 	mousePosition : {x: 400, y:300}
 };
+
 var KEYS = [];
 function define_INPUTS(keys){
 
@@ -66,20 +68,20 @@ window.onkeyup = function(event){
 }
 function canvasClick(event)
 {
-	game.player.shoot();
+	CONTEXT.onClick(); 
 	
 }
 function mouseMove(event){
 	INPUTS.mousePosition = getMouseCoords(event);
 
 }
-
+/*
 
 window.onmouseup = function(event){
 	console.log("?");
 	INPUTS.mouseDown = false;
 }
-
+*/
 INPUTS.getKey = function(key){
 
 	return INPUTS[key][1] || false;

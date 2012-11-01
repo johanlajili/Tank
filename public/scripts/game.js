@@ -9,6 +9,9 @@ var Game = function(){};
 	Game.prototype.animate = function(){
 
 	};
+	Game.prototype.onClick = function(){
+
+	};
 	Game.prototype.render = function(){
 
 	};
@@ -27,6 +30,9 @@ game.render = function(){
 }
 game.animate = function(){
 	
+}
+game.onClick = function(){
+	game.player.shoot();
 }
 game.update = function(){
 	this.physics.update();
