@@ -67,7 +67,7 @@ game.Physics = function(){
          fixDef.filter.categoryBits   = CONFIG.wallBit;
          fixDef.filter.maskBits = CONFIG.bombBit | CONFIG.tankBit;
 
-         this.world.CreateBody(bodyDef).CreateFixture(fixDef);
+        return this.world.CreateBody(bodyDef).CreateFixture(fixDef).GetBody();
       }
 
       this.createTank = function(posX,posY,w,h, player)

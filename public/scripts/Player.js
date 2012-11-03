@@ -183,7 +183,7 @@ game.Player = function(id, color, name, x, y, srv){
 	this.calculateSpawnPosition = function(){
 
 		var spawn = {x:0,y:0};
-		while (game.map.level[Math.floor(spawn.x / game.map.imgWidth)][Math.floor(spawn.y / game.map.imgHeight)] != "o"){
+		while (game.map.level[Math.floor(spawn.x / game.map.imgWidth)][Math.floor(spawn.y / game.map.imgHeight)].solid){
 			spawn = {x : Math.floor(Math.random() * game.map.width * game.map.imgWidth), y : Math.floor(Math.random() * game.map.height * game.map.imgHeight)};
 		}
 		return spawn;

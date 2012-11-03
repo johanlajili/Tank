@@ -21,7 +21,7 @@ if (CONFIG.local)
 	CONFIG.ip = CONFIG.localhost;
 else
 	CONFIG.ip = CONFIG.distantip;
-CONFIG.port = "80";
+CONFIG.port = "1337";
 
 CONFIG.spawns = [];
 for (var i = 1; i < 15; i++){

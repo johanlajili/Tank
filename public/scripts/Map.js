@@ -19,25 +19,9 @@ game.Map = function(level, theme, name){
 			this.level[i] = [];
 			for (var j = 0; j < this.height; j++){
 
-				// Temp code using pregenerated map :
-				this.level[i][j] = this.tempMap[i][j];
-				if (this.level[i][j] == "x" || this.level[i][j] == "w" || this.level[i][j] == "e")
-					game.physics.createFixeBlock(i*this.imgWidth+this.imgWidth/2, j*this.imgHeight+this.imgHeight/2, this.imgWidth/2, this.imgHeight/2,i, j);
-				/*
-				this.level[i][j] = "o";
-				var coeff = this.randomCoeff;
-				if ((i > 0 && j > 0 )&& (this.level[i-1][j] == "w"|| this.level[i][j-1] == "w"))
-					coeff = this.nearRandomCoeff
-				if (Math.floor(Math.random() *  coeff) == 2){
-					this.level[i][j] = "w";
-					game.physics.createFixeBlock(i*this.imgWidth+this.imgWidth/2, j*this.imgHeight+this.imgHeight/2, this.imgWidth/2, this.imgHeight/2)
-				}
-				else
-				if (i == 0 || j == 0 || i == this.width - 1 || j == this.height - 1){
-					this.level[i][j] = "x";
-					game.physics.createFixeBlock(i*this.imgWidth+this.imgWidth/2, j*this.imgHeight+this.imgHeight/2, this.imgWidth/2, this.imgHeight/2)
-				}
-				*/
+				this.level[i][j] = new Block({x:i, y:j, w:this.imgWidth, h:this.imgHeight}) 
+				this.level[i][j].updateWithLetter(this.tempMap[i][j]);
+				this.level[i][j].createBody();
 			}
 		}
 	}
@@ -53,44 +37,20 @@ game.Map = function(level, theme, name){
 	else
 		this.name = "Anonymousse";
 
-	this.blocks = {
-		"x" : {
-
-			"x" : 96,
-			"y" : 0
-		},
-		"o" : {
-
-			"x" : 0,
-			"y" : 0
-		},
-		"w" : {
-
-			"x" : 96,
-			"y" : 0
-		},
-		"e" : {
-			"x" : 192,
-			"y" : 0
-		}
-	};
-
 	this.update = function(){
 
 	}
 
 	this.render = function(CTX){
-
+		
 		for (var i = 0; i < this.width; i++){
 			for (var j = 0; j < this.height; j++){
 
 				var l = this.level[i][j];
-				var x = this.blocks[l].x;
-				var y = this.blocks[l].y;
-
-				game.camera.drawImage(this.theme, x, y, this.imgWidth, this.imgHeight, i * this.imgWidth, j * this.imgHeight, this.imgWidth, this.imgHeight);
-				if (x!=0) game.minimap.draw({type:"block", x:i * this.imgWidth, y:j * this.imgHeight, w:this.imgWidth, h:this.imgHeight})
+				game.camera.drawImage(this.theme, l.theme.x, l.theme.y, l.theme.w, l.theme.h, l.realX, l.realY, l.w, l.h);
+				if (l.solid) game.minimap.draw({type:"block", x:l.realX, y:l.realY, w:l.w, h:l.h})
 			}
 		}
+		
 	}
 }

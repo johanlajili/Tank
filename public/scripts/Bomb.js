@@ -61,8 +61,9 @@ game.Bomb.prototype.onCollision = function(other)
 	if (other.m_userData.type == "wall" && other.m_userData.id != this.pId){
 		this.ghost = false;
 		var p = CONTEXT.map.level[other.m_userData.x][other.m_userData.y];
-		if (p == "e"){
-			CONTEXT.map.level[other.m_userData.x][other.m_userData.y] = "o";
+		if (p.destructible){
+			CONTEXT.map.level[other.m_userData.x][other.m_userData.y].updateWithLetter("o");
+			CONTEXT.map.level[other.m_userData.x][other.m_userData.y].destroy();
 			this.life = 0;
 			this.destroyed = true;
 		}
