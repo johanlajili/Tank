@@ -16,12 +16,12 @@ CONFIG.bombBit = 0x0004;
 CONFIG.bombLife = 3;
 CONFIG.local = true;
 CONFIG.localhost = "localhost";
-CONFIG.distantip = "172.16.60.110";
+CONFIG.distantip = "tank.jit.su";
 if (CONFIG.local)
 	CONFIG.ip = CONFIG.localhost;
 else
 	CONFIG.ip = CONFIG.distantip;
-CONFIG.port = "1337";
+CONFIG.port = "80";
 
 CONFIG.spawns = [];
 for (var i = 1; i < 15; i++){

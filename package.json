@@ -1,19 +1,19 @@
 {
-
-	"name": "hello_world",
-	"version": "1.0.0",
-	"author": "Dieu",
-	"main": "server",
-	"engines": {
-		"node": "0.8.11"
-	},
-	"scripts": {
-		"start": "serverjs"
-	},
-	"dependencies": {
-		"express": "3.0.0rc4",
-		"connect": "2.4.4",
-		"jade": "0.27.6",
-		"socket.io": "0.9.10"
-	}
+ "version": "1.0.0-13",
+ "author": "lajili",
+ "main": "server",
+ "engines": {
+  "node": "0.8.x"
+ },
+ "scripts": {
+  "start": "server.js"
+ },
+ "dependencies": {
+  "express": "3.0.x",
+  "connect": "2.4.x",
+  "jade": "0.27.x",
+  "socket.io": "0.9.x"
+ },
+ "name": "tank",
+ "subdomain": "tank"
 }
