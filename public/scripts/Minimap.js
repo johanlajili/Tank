@@ -6,10 +6,13 @@ function Minimap(args)
 	height
 	virtualWidth
 	virtualHeight
+	pace;
+
+
 	elementTypes witch is a array that contains
-		typeId	shape	color	blink	rotate
+		typeId	shape	color	blink	
 	for instance:
-		block	square	green	false	false
+		block	square	green	false
 	ctx
 	*/
 
@@ -22,43 +25,44 @@ function Minimap(args)
 	this.virtualHeight = args.virtualHeight || args.height;
 	this.backgroundColor = args.backgroundColor || "rgba(0,0,0,0.5)"
 	this.elements = {};
-
+	this.pace = args.pace || 20;
+	this.timerPace = 0;
 	//Making of a virtual canvas that will contain the minimap.
 	this.canvas = document.createElement("canvas");
 	this.canvas.width = args.virtualWidth || args.width;
 	this.canvas.height = args.virtualHeight || args.height;
 	this.mapCtx = this.canvas.getContext('2d');
-	
 	this.mainCtx = args.ctx || null;
-	this.createType = function (id, shape, color, blink, rotate)
+	this.createType = function (id, shape, color, blink)
 	{
-		this.elements[id] = {shape: shape, color: color, blink: blink, rotate: rotate};
+		this.elements[id] = {shape: shape, color: color, blink: blink};
 	}
 	this.draw = function (args)
 	{
-		this.mapCtx.fillStyle = this.elements[args.type].color;
-		switch(this.elements[args.type].shape)
-		{
-			case "square":
-			this.mapCtx.fillRect(args.x,args.y,args.w,args.h)
-			break;
-			case "round":
-			this.mapCtx.beginPath();
-			this.mapCtx.arc(args.x,args.y,args.w,0,2*Math.PI);
-			this.mapCtx.fill();
-			this.mapCtx.closePath();
-			break;
-			case "triangle":
-			this.mapCtx.moveTo(argsx+args.w/2, args.y);
-			this.mapCtx.lineTo(argsx+args.w, args.y+args.h);
-			this.mapCtx.lineTo(argsx,args.y+args.h);
-			this.mapCtx.lineTo(argsx+args.w/2, args.y);
-			break;
-		}
+		var translateDecalage = {x: 0, y:0}
 		
+		if (this.elements[args.type].blink == false || this.timerPace <= this.pace/2)
+		{	
+
+			this.mapCtx.fillStyle = this.elements[args.type].color;
+			switch(this.elements[args.type].shape)
+			{
+				case "square":
+				this.mapCtx.fillRect(args.x,args.y,args.w,args.h)
+				break;
+				case "round":
+				this.mapCtx.beginPath();
+				this.mapCtx.arc(args.x,args.y,args.w/4,0,2*Math.PI);
+				this.mapCtx.closePath();
+				this.mapCtx.fill();
+				break;
+			}
+		}
+			this.mapCtx.restore();		
 	}
 	this.render = function()
 	{
+		this.timerPace++; if (this.timerPace == this.pace + 1) this.timerPace = 0;
 		this.mainCtx.globalAlpha = 0.5;
 		this.mainCtx.drawImage(this.canvas, this.x, this.y, this.width, this.height);
 		this.mainCtx.globalAlpha = 1;

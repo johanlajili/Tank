@@ -31,12 +31,12 @@ for (var i = 1; i < 15; i++){
 }
 
 CONFIG.colorsList = [
-
-	"Blue",
-	"Green",
+	"Bleu",
+	"Jaune",
 	"Orange",
-	"Purple",
-	"Red"
+	"Rouge",
+	"Vert",
+	"Rose"
 ];
 
 CONFIG.randomPseudos = [

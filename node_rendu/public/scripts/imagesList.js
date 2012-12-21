@@ -2,17 +2,17 @@
 	
 	["chaton_walk", "chaton.jpg"],
 	["tankOrange", "Tank/orange.png"],
-	["tankPurple", "Tank/purple.png"],
 	["tankGreen", "Tank/green.png"],
 	["tankBlue", "Tank/blue.png"],
 	["tankRed", "Tank/red.png"],
+	["tankRose", "Tank/rose.png"],
 	//lol
 
 	["canonOrange", "Canon/orange.png"],
 	["canonRed", "Canon/red.png"],
-	["canonPurple", "Canon/purple.png"],
 	["canonGreen", "Canon/green.png"],
 	["canonBlue", "Canon/blue.png"],
+	["canonRose", "Canon/rose.png"],
 
 	["crossHairOrange", "CrossHair/orange.png"],
 	["crossHairRed", "CrossHair/red.png"],

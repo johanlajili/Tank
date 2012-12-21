@@ -53,7 +53,7 @@ function NLImages(imagesPath){
 				str - The string to log
 	*/
 	this.log = function(str){
-			console.log("[NLImages] " + str);
+			//console.log("[NLImages] " + str);
 	}
 	/*
 		Function: getImage(imageName)

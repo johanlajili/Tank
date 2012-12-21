@@ -17,9 +17,9 @@ game.init = function(){
 	//initCanvas(CONFIG.canvasWidth, CONFIG.canvasHeight, CONFIG.canvasName, game, document.body);
 	
 	//gestion de la minimap
-	game.minimap = new Minimap({width: 100, height: 100, virtualWidth: 1440, virtualHeight: 1440, x: 690, y: 10, ctx: game.CTX, backgroundColor: "gray"});
-	game.minimap.createType("block", "square", "green", false, false);
-	game.minimap.createType("player", "round", "orange", false, false);
+	game.minimap = new Minimap({width: 100, height: 100, virtualWidth: 1440, virtualHeight: 1440, x: 690, y: 10, ctx: game.CTX, backgroundColor: "gray", pace: 50});
+	game.minimap.createType("block", "square", "green", false);
+	game.minimap.createType("player", "round", "orange", false);
 	
 	game.camera = new game.Camera(CONTEXT.CANVAS.width, CONTEXT.CANVAS.height, game.player, game.CTX);
 	

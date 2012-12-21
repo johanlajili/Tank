@@ -24,33 +24,79 @@ function Block(args)
 	{
 		switch (letter)
 		{
-			case "x":
-				this.type = "bordure";
-				this.solid = true;
-				this.destructible = false;
-				this.theme.x = 96;
-				this.theme.y = 0;
-			break;
-			case "e":
-				this.type = "cassable"
-				this.solid = true;
-				this.destructible = true;
-				this.theme.x = 192;
-				this.theme.y = 0;
-			break;
-			case "o":
-				this.type = "vide"
+			case ".":
+				this.type = "vide";
 				this.solid = false;
+				this.destructible = false;
+				this.visible = true;
+				this.theme.x = 384;
+				this.theme.y = 0;
+			break;
+			case "u":
+				this.type = "horizontal";
+				this.solid = true;
+				this.visible = true;
+				this.destructible = false;
+				this.theme.x = 288;
+				this.theme.y = 0;
+			break;
+			case "=":
+				this.type = "vertical";
+				this.solid = true;
+				this.visible = true;
 				this.destructible = false;
 				this.theme.x = 0;
 				this.theme.y = 0;
 			break;
-			case "w":
-				this.type = "block solide"
+			case "o":
+				this.type = "central";
 				this.solid = true;
+				this.visible = true;
 				this.destructible = false;
 				this.theme.x = 96;
 				this.theme.y = 0;
+			break;
+			case "x":
+				this.type = "croix";
+				this.solid = true;
+				this.visible = true;
+				this.destructible = false;
+				this.theme.x = 192;
+				this.theme.y = 0;
+			break;
+
+
+			case "v":
+				this.type = "horizontalCassable"
+				this.solid = true;
+				this.visible = true;
+				this.destructible = true;
+				this.theme.x = 288;
+				this.theme.y = 96;
+			break;
+			case "e":
+				this.type = "verticalCassable"
+				this.solid = true;
+				this.visible = true;
+				this.destructible = true;
+				this.theme.x = 0;
+				this.theme.y = 96;
+			break;
+			case "w":
+				this.type = "centralCassable"
+				this.solid = true;
+				this.visible = true;
+				this.destructible = true;
+				this.theme.x = 96;
+				this.theme.y = 96;
+			break;
+			case "z":
+				this.type = "croixCassable";
+				this.solid = true;
+				this.visible = true;
+				this.destructible = true;
+				this.theme.x = 192;
+				this.theme.y = 96;
 			break;
 		}
 	}

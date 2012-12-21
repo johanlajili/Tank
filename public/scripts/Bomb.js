@@ -49,7 +49,6 @@ game.Bomb.prototype.getBombDatas = function(){
 }
 game.Bomb.prototype.onCollision = function(other)
 {
-	console.log("collision")
 	this.life--;
 	if (this.life ==0){
 
@@ -62,7 +61,7 @@ game.Bomb.prototype.onCollision = function(other)
 		this.ghost = false;
 		var p = CONTEXT.map.level[other.m_userData.x][other.m_userData.y];
 		if (p.destructible){
-			CONTEXT.map.level[other.m_userData.x][other.m_userData.y].updateWithLetter("o");
+			CONTEXT.map.level[other.m_userData.x][other.m_userData.y].updateWithLetter(".");
 			CONTEXT.map.level[other.m_userData.x][other.m_userData.y].destroy();
 			this.life = 0;
 			this.destroyed = true;

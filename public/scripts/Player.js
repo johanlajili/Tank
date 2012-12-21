@@ -44,7 +44,7 @@ game.Player = function(id, color, name, x, y, srv){
 		for (var i in this.bombs){
 			this.bombs[i].render(CTX);
 		}
-		game.minimap.draw({type:"player", x:this.x, y:this.y, w:this.w/2, h:this.h})
+		game.minimap.draw({type:"player", x:this.x, y:this.y, w:this.w*2, h:this.h*2, angle: this.angle})
 		this.drawTarget(CTX);
 	}
 	this.drawPlayer = function()
@@ -65,7 +65,6 @@ game.Player = function(id, color, name, x, y, srv){
 		game.camera.restore();
 	}
 	this.drawTarget = function(CTX){
-		
 		CTX.drawImage(imageManager.getImage("crossHair" + this.color), INPUTS.mousePosition.x - imageManager.getImageSize("crossHair" + this.color).x / 2, INPUTS.mousePosition.y - imageManager.getImageSize("crossHair" + this.color).y / 2);
 
 	}
