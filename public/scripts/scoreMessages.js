@@ -35,7 +35,7 @@ game.scoreMessages.tap = function(str){
 }
 game.scoreMessages.send = function(){
 	if (this.currentStr != "")
-		CONTEXT.socket.emit('chatMsg', game.player.name + ": " + this.currentStr);
+		CONTEXT.socket.emit('chatMsg', {id : game.player.id, msg : game.player.name + ": " + this.currentStr});
 	this.currentStr = "";
 }
 game.scoreMessages.bckspc = function(){
