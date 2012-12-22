@@ -26,6 +26,9 @@ game.init = function(){
 	game.camera = new game.Camera(CONTEXT.CANVAS.width, CONTEXT.CANVAS.height, game.player, game.CTX)
 	game.socket = io.connect('http://' + CONFIG.ip + ':' + CONFIG.port);
 	game.initSockets();
+
+	soundManager.play("funky")
+
 	game.ready = true;
 }
 window.onload = function(event){

@@ -72,6 +72,7 @@ game.Player = function(id, color, name, x, y, srv){
 	this.shoot = function(){
 		
 		if (game.currdate - this.lastBomb > this.bombsTimer){
+			soundManager.play("shoot")
 			var bombID = Math.floor(Math.random() * 9999);
 			this.bombs[bombID] = new game.Bomb(this.id, this.x, this.y, this.aimAngle, {x: Math.cos(this.angle) * this.speed, y:Math.sin(this.angle) * this.speed}, bombID);
 			this.lastBomb = game.currdate;

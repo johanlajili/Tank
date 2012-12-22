@@ -5,7 +5,7 @@ menu.init = function(){
 	menu.CANVAS.addEventListener("click", canvasClick, false);
 
 	this.listButtons = [];
-	this.listButtons.push(new Button(this.CANVAS.width/2,2*this.CANVAS.height/4,"Play",35,this.CTX,imageManager.getImage("button"),14));
+	this.listButtons.push(new Button(this.CANVAS.width/2,2*this.CANVAS.height/3,"",35,this.CTX,imageManager.getImage("button"),14));
 	this.isInit = true;
 	this.title = new Title(this.CTX,imageManager.getImage("logo"));
 	loader.CANVAS = menu.CANVAS;

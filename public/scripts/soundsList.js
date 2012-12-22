@@ -1,7 +1,11 @@
-﻿var soundManager = new NLSounds();
+﻿var soundManager = new NLSounds("sons/");
 soundManager.channels = 7;
-var soundsList = [
-
+var musicList = [
+["funky", "Funky"]
 ];
 
-//soundManager.pushSounds(soundsList, "sound");
+var soundsList = [
+["shoot", "shoot"]
+];
+soundManager.pushSounds(musicList, "music");
+soundManager.pushSounds(soundsList, "shoot");

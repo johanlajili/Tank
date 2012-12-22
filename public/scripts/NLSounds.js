@@ -15,6 +15,7 @@ function NLSounds(soundsPath){
 			["soundName", "soundPath"]
 		]
 	*/
+
 	if (Audio != undefined){
 		this.audioWorks = true;
 	}else{
@@ -22,7 +23,7 @@ function NLSounds(soundsPath){
 	}
 	this.soundList = [];
 
-	this.channels = 3;
+	this.channels = 7;
 	/*
 		variable: soundsPath
 
@@ -53,6 +54,7 @@ function NLSounds(soundsPath){
 	if (soundsPath === undefined)
 	{
 		this.soundsPath = "snds/";
+
 	}
 
 	/*
@@ -129,9 +131,9 @@ function NLSounds(soundsPath){
 				var currentLoader = this;
 				if (x.load)
 					x.load();
-
+				
 				var name = p[0];
-				x.addEventListener('canplaythrough', soundLoad(currentLoader, name), false);
+				//x.addEventListener('canplaythrough', soundLoad(currentLoader, name), false);
 
 				if (x.canPlayType){
 					if (x.canPlayType('audio/mpeg;')) {
@@ -143,17 +145,18 @@ function NLSounds(soundsPath){
 					x.src= this.soundsPath + p[1] + ".mp3";
 				}
 				
-				this.numberSounds++;
+				//this.numberSounds++;
 				if (type == "music"){
 
-					//x.loop = "loop";	
+					x.loop = "loop";	
 				}
 			}
-			this.percentCoeff = 100 / this.numberSounds;
-			this.refreshVolume();
+			//this.percentCoeff = 100 / this.numberSounds;
+			//this.refreshVolume();
 			for (var i in this.soundList){
-				
+			
 			}
+
 		}
 	}
 
@@ -211,7 +214,7 @@ function NLSounds(soundsPath){
 	
 			var p = this.soundList[soundName];
 			p.paused = false;
-			p.channels[p.chann].play();
+			p.channels[0].play();
 			p.times[p.chann]= new Date().getTime() / 1000;
 			p.chann++;
 			if (p.chann == this.channels)
