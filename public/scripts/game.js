@@ -28,10 +28,6 @@ game.render = function(){
 	this.minimap.render()
 	CONTEXT.scoreMessages.show();
 }
-game.init = function(){
-	soundManager.play("funky")
-	console.log("FUNKY")
-}
 game.animate = function(){
 	
 }
