@@ -219,11 +219,11 @@ game.Player = function(id, color, name, x, y, srv){
 	this.angle = 0;
 	this.aimAngle = 0; // angle de tir, en radian
 	this.aimPoint = {x: 0, y:0}
-	this.speed = 0.1;
-	this.accel = 0.01;
-	this.angleTick = 0.05;
-	this.maxSpeed = 0.1;
-	this.minSpeed = -0.1;
+	this.speed = 0.12;
+	this.accel = 0.0175;
+	this.angleTick = 0.078;
+	this.maxSpeed = 0.135;
+	this.minSpeed = -0.135;
 	this.type = "player";
 
 	this.ghost = true;
