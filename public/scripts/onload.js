@@ -22,7 +22,7 @@ game.init = function(){
 	game.minimap.createType("player", "round", "orange", false);
 	
 	game.camera = new game.Camera(CONTEXT.CANVAS.width, CONTEXT.CANVAS.height, game.player, game.CTX);
-	
+	game.particles = new game.Particles();
 	game.camera = new game.Camera(CONTEXT.CANVAS.width, CONTEXT.CANVAS.height, game.player, game.CTX)
 	game.socket = io.connect('http://' + CONFIG.ip + ':' + CONFIG.port);
 	game.initSockets();

@@ -8,7 +8,44 @@ game.Camera = function(width, height, gameObject, CTX){
 	this.CTX = CTX;
 	this.debugCounter = 0;
 	this.saved = false;
+	this.background = imageManager.getImage("background")
+	this.pattern = this.CTX.createPattern(this.background, "repeat")
+	this.giantCanvas = document.createElement("canvas");
+	this.giantCanvas.width = game.map.width*game.map.imgWidth;
+	this.giantCanvas.height= game.map.height*game.map.imgHeight;
+	this.giantCtx = this.giantCanvas.getContext("2d")
+	this.giantCtx.rect(0, 0, this.giantCanvas.width, this.giantCanvas.height);		
+  	this.giantCtx.fillStyle = this.pattern;
+  	this.giantCtx.fill();
+	this.drawCanvas = function(canvas)
+	{
+    	var pos = {x: this.x, y: this.y, w:this.width, h:this.height};
+    	var decalage = {x: 0, y: 0}
+    	if (pos.x < 0) 
+    		{
+    			decalage.x = 0 - pos.x;
+    			pos.x = 0;
 
+    		}
+    	if (pos.y < 0) 
+    		{
+    			decalage.y = 0 - pos.y;
+    			pos.y = 0;
+    		}
+    	if (pos.x + pos.w > game.map.width*game.map.imgWidth) 
+    		{
+    			decalage.x = game.map.width*game.map.imgWidth - pos.x - pos.w;
+    			pos.x = (game.map.width*game.map.imgWidth) - this.width;
+    		}
+    	if (pos.y + pos.h > game.map.height*game.map.imgHeight) 
+    		{
+    			decalage.y = game.map.width*game.map.imgWidth - pos.y - pos.h; 
+    			pos.y = (game.map.height*game.map.imgHeight) - this.height;
+    		}
+		this.CTX.drawImage(this.giantCanvas, pos.x , pos.y , this.width, this.height, 0+decalage.x, 0+decalage.y, this.width, this.height)
+		//this.CTX.fillRect(100,100,100,100)
+	//	console.log(this.x, this.y, this.width, this.height)
+	}
 	this.drawImage = function(img, sx, sy, sw, sh, dx, dy, dw, dh){
 
 		if (arguments.length == 3){

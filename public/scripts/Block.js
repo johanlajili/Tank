@@ -28,7 +28,7 @@ function Block(args)
 				this.type = "vide";
 				this.solid = false;
 				this.destructible = false;
-				this.visible = true;
+				this.visible = false;
 				this.theme.x = 384;
 				this.theme.y = 0;
 			break;
