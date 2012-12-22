@@ -80,6 +80,8 @@ game.Bomb.prototype.onPreSolve = function(other, contact)
 	}
 }
 game.Bomb.prototype.render = function(CTX) {
+	game.particles.drawSmoke(this.x, this.y)
+
 	// save the current co-ordinate system 
 	// before we screw with it
 	game.camera.save(); 

@@ -43,8 +43,9 @@ game.Camera = function(width, height, gameObject, CTX){
     			pos.y = (game.map.height*game.map.imgHeight) - this.height;
     		}
 		this.CTX.drawImage(this.giantCanvas, pos.x , pos.y , this.width, this.height, 0+decalage.x, 0+decalage.y, this.width, this.height)
-		//this.CTX.fillRect(100,100,100,100)
-	//	console.log(this.x, this.y, this.width, this.height)
+		this.CTX.globalAlpha = 0.5;
+		this.CTX.drawImage(canvas, pos.x , pos.y , this.width, this.height, 0+decalage.x, 0+decalage.y, this.width, this.height)
+		this.CTX.globalAlpha = 1;
 	}
 	this.drawImage = function(img, sx, sy, sw, sh, dx, dy, dw, dh){
 

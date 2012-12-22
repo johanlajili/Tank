@@ -23,7 +23,7 @@
 	["crossHairRouge", "CrossHair/rouge.png"],
 	["crossHairRose", "CrossHair/rose.png"],
 	["background", "tiles_Background.png"],
-
+	["smoke", "smoke.png"],
 	["Bomb", "Bomb.png"],
 	// Map spritesheet
 	["theme1", "tiles_Block.png"],

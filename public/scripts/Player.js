@@ -45,6 +45,7 @@ game.Player = function(id, color, name, x, y, srv){
 			this.bombs[i].render(CTX);
 		}
 		game.minimap.draw({type:"player", x:this.x, y:this.y, w:this.w*2, h:this.h*2, angle: this.angle})
+		game.particles.drawTrace(this.x, this.y, this.angle)
 		this.drawTarget(CTX);
 	}
 	this.drawPlayer = function()
